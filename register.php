@@ -1,7 +1,13 @@
 <?php
 
+require 'config.php';
+
+$conn = initDatabase();
+
 $usernameErr = $emailErr = $passErr = $cpassErr = "";
 $username = $email = $password = $confirm_password = "";
+$fname = $_POST['fname'];
+$lname = $_POST['lname'];
 
 if (isset($_POST['submit'])) { 
     if(empty(trim($_POST["username"]))){
@@ -10,6 +16,8 @@ if (isset($_POST['submit'])) {
     else{
         // Prepare a select statement
         $sql = "SELECT id FROM users WHERE username = :username";
+
+
         
         if($stmt = $conn->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -88,23 +96,27 @@ if(empty(trim($_POST["confirm_password"]))){
 if(empty($usernameErr) && empty($emailErr) && empty($passErr) && empty($cpassErr)){
         
     // Prepare an insert statement
-    $sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
+    $sql = "INSERT INTO users (username, fname, lname, email, password) VALUES (:username, :fname, :lname, :email, :password)";
      
     if($stmt = $conn->prepare($sql)){
         // Bind variables to the prepared statement as parameters
         $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
         $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
         $stmt->bindParam(":password", $param_password, PDO::PARAM_STR);
+        $stmt->bindParam(":fname", $param_fname, PDO::PARAM_STR);
+        $stmt->bindParam(":lname", $param_lname, PDO::PARAM_STR);
         
         // Set parameters
         $param_username = $username;
         $param_email = $email;
+        $param_fname = $fname;
+        $param_lname = $lname;
         $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
         
         // Attempt to execute the prepared statement
         if($stmt->execute()){
             // Redirect to login page
-            header("location: login.php");
+            header("location: sign-up.php");
         } else{
             echo "Something went wrong. Please try again later.";
         }
