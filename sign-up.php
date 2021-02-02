@@ -23,7 +23,7 @@ $title = 'Sign Up';
 <body>
 
     <div class="signup-form">
-        <form action="signup-auth.php" method="POST">
+        <form action="register.php" method="POST">
             <h2>Create an account</h2>
 
             <div class="form-group">
@@ -47,7 +47,7 @@ $title = 'Sign Up';
                 <span class="input-icon"><i class="fa fa-lock"></i></span>
             </div>
 
-            <button type="submit" name="submit-signup" class="btn btn-primary">Create your account</button>
+            <button type="submit" name="submit" class="btn btn-primary">Create your account</button>
             <a class="create-acc" href="index.php">I already have an account</a>
         </form>
 
