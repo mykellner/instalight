@@ -12,8 +12,8 @@ $title = 'Sign Up';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title ?></title>
     <!-- Bootstrap CSS -->
-   <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- My CSS -->
     <link rel="stylesheet" href="style.css">
     <!-- Font Awesome -->
@@ -27,19 +27,19 @@ $title = 'Sign Up';
             <h2>Create an account</h2>
 
             <div class="form-group">
-                <input type="text" id="first_name" name="fname" placeholder="First Name">
+                <input type="text" id="fname" name="fname" placeholder="First Name">
                 <span class="input-icon"><i class="fa fa-user"></i></span>
             </div>
             <div class="form-group">
-                <input type="text" name="lname" placeholder="Last name">
+                <input type="text" name="lname" placeholder="Last Name">
                 <span class="input-icon"><i class="fa fa-user"></i></span>
             </div>
             <div class="form-group">
-                <input type="text" name="username" placeholder="Country">
+                <input type="text" name="username" placeholder="Username">
                 <span class="input-icon"><i class="fa fa-globe-europe"></i></span>
             </div>
             <div class="form-group">
-                <input type="text" name="email" placeholder="E-mail Address" required>
+                <input type="text" name="email" placeholder="E-mail">
                 <span class="input-icon"><i class="fa fa-envelope"></i></span>
             </div>
             <div class="form-group">
