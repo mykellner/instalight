@@ -55,3 +55,4 @@ $users = getPicturesFromUser($pdo);
 </div>
 
 
+<?php include 'templates/footer.php'?>
