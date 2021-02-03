@@ -1,3 +1,9 @@
+/* Body */
+
+body { 
+  padding-top: 70px;
+}
+
 /* Login Form */
 
 .signup-form h2 {
@@ -116,9 +122,24 @@
   }
 
   /* navbar */
-  .navbar-brand {
+.navbar-brand {
     transform: translateX(-50%);
     left: 50%;
     position: absolute;
 }
 
+/* Feed */
+.feed-picture img {
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.container-feed {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.card {
+  margin: 10px 0 10px 0;
+} 
+
+/* Footer */
