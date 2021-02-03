@@ -1,6 +1,10 @@
 <?php
 
-function addImageToDatabase ($pdo, $userid, $filename, $text) {
+require 'config.php';
+
+$pdo = initDatabase();
+
+function addImageToDatabase ($pdo, $userid, $filename, $text){
 
     $sql = 'INSERT INTO images (user_id, filename, text) VALUES (:user_id, :filename, :text)';
     $statement = $pdo->prepare($sql);
@@ -23,12 +27,13 @@ function deleteImage ($pdo, $imageid) {
 
 function updateImageText($pdo, $imageid, $text) {
 
-    $sql = 'UPDATE images SET text = :text, WHERE id = :id';
+    $sql = 'UPDATE images SET text = :text WHERE id = :id';
     $statement = $pdo->prepare($sql);
     $statement->execute([
         'text' => $text,
         'id' => $imageid,
     ]);
+
 
 }
 
