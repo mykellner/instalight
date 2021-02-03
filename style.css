@@ -1,3 +1,9 @@
+/* Body */
+
+body { 
+  padding-top: 70px;
+}
+
 /* Login Form */
 
 .signup-form h2 {
@@ -22,7 +28,7 @@
       margin: 0 auto;
       display: table;
       padding: 15px 30px 30px;
-      margin-top: 150px;
+      margin-top: 100px;
       box-sizing: border-box;
   }
   .form-group {
@@ -62,7 +68,7 @@
     float: left;
     width: 100%;
     text-decoration: none;
-    color: #45aba6;
+    color: #363a3a;
     font-size: 14px;
     text-align: center;
     margin-top: 11px;
@@ -114,3 +120,26 @@
       width: 100%;
   
   }
+
+  /* navbar */
+.navbar-brand {
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+}
+
+/* Feed */
+.feed-picture img {
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.container-feed {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.card {
+  margin: 10px 0 10px 0;
+} 
+
+/* Footer */
