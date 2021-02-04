@@ -129,9 +129,16 @@ body {
 }
 
 /* Feed */
+
 .feed-picture img {
-  max-width: 500px;
+  width: 100%;
   margin-bottom: 20px;
+  object-fit: cover;
+}
+
+
+.card-body {
+  padding: 0;
 }
 
 .container-feed {
@@ -151,3 +158,4 @@ body {
 }
 
 /* Footer */
+
