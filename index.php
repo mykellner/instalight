@@ -36,7 +36,7 @@ $mess = isset($_GET['mess']) ? "<p class='text-error'>" . $_GET['mess'] . "</p>"
                         <input class="button" type="submit" value="Logga in">
                         <p></p>
                         <?php session_abort() ?>
-                        <a class="button" href="register.php">Sign up</a>
+                        <a class="button" href="sign-up.php">Sign up</a>
 
                         <div class="text-sm"></div>
                     </div>

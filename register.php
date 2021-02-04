@@ -67,6 +67,9 @@ if (isset($_POST['submit'])) {
  
  }
  }
+
+ $fname = trim($_POST["fname"]);
+ $lname = trim($_POST["lname"]);
  
 // Validate password
 if(empty(trim($_POST["password"]))){

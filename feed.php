@@ -34,12 +34,12 @@ $users = getPicturesFromUser($pdo);
 
   <?php foreach (array_reverse($users) as $user) : ?>
     <div class="col-12">
-      <a href="profile.php?user=<?php echo $user['id']; ?>">
+      <a href="profiles.php?user=<?php echo $user['id']; ?>">
         <div class="card text-center">
           <div class="card-body">
             <h5 class="card-title"><?= $user['username'] ?></h5>
             <div class="feed-picture">
-              <img src='<?php echo $user['filename'] ?>'>
+              <img src='images/<?php echo $user['filename'] ?>'>
             </div>
             <p class="card-text"> <?= $user['text'] ?> </p>
           </div>

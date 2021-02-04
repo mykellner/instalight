@@ -9,9 +9,9 @@ $username = trim($_POST['username']);
 $password = trim($_POST['password']);
 $fname = trim($_POST['fname']);
 
-$sql = "SELECT * FROM users WHERE email = :email AND password = :password";
-$stm = initDatabase($database)->prepare($sql);
-$stm->execute(array('email' => $username, 'password' => $password));
+$sql = "SELECT * FROM users WHERE username = :username AND password = :password";
+$stm = $pdo->prepare($sql);
+$stm->execute(array('username' => $username, 'password' => $password));
 $res = $stm->fetch(PDO::FETCH_ASSOC);
 
 

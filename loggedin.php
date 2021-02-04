@@ -45,7 +45,7 @@ $table .= "\n\t<tbody>\n</table>";
 <body>
 
     <div>
-        <h2>inloggad som</h2>
+        <h2>inloggad som <?php echo $_SESSION['username'] ?> </h2>
         <?php echo $table; ?>
     </div>
 
