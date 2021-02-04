@@ -178,6 +178,12 @@ body {
 }
 
 
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+
 .body-loggin {
   margin-left: 30px;
   margin-top: 50px;
@@ -186,5 +192,24 @@ body {
   margin-left: 7px;
 }
 
-/* Footer */
+/* Profiles */
 
+.profile-images {
+  max-width: 450px;
+  padding-bottom: 30px;
+}
+
+.profile-images img {
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.profile-images-feed{
+  padding-top: 20px;
+  border-top: 1px solid rgba(0,0,0,0.125);
+}
+
+.profile-header h3{
+  margin-top: 40px;
+}

@@ -7,8 +7,6 @@ include 'templates/header-notsignedin.php';
 
 ?>
 
-
-
   <div class="signup-form">
     <form action="login.php" method="POST">
      <h2 class="login">Login</h2>
