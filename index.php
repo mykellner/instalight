@@ -25,8 +25,8 @@ $mess = isset($_GET['mess']) ? "<p class='text-error'>" . $_GET['mess'] . "</p>"
                 <?php echo $mess; ?>
                 <form method="POST" action="login.php">
                     <div class="form-group">
-                        <label class="form-label" for="username">Username</label>
-                        <input class="form-input" id="username" name="username" type="text" placeholder="Email" required>
+                        <label class="form-label" for="email">Username</label>
+                        <input class="form-input" id="username" name="email" type="text" placeholder="username" required>
                         <label class="form-label" for="password">Password</label>
                         <input class="form-input" id="password" name="password" type="password" placeholder="Password" required>
                         <label class="form-checkbox">
@@ -35,7 +35,7 @@ $mess = isset($_GET['mess']) ? "<p class='text-error'>" . $_GET['mess'] . "</p>"
                         </label>
                         <input class="button" type="submit" value="Logga in">
                         <p></p>
-                        <?php session_abort() ?>
+                       
                         <a class="button" href="register.php">Sign up</a>
 
                         <div class="text-sm"></div>
@@ -44,3 +44,6 @@ $mess = isset($_GET['mess']) ? "<p class='text-error'>" . $_GET['mess'] . "</p>"
             </div>
         </div>
     </div>
+
+
+   
