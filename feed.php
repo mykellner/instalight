@@ -15,7 +15,7 @@ if (!isset($_SESSION['logged_in'])) {
 function getPicturesFromUser($pdo) {
     
     // combine the users and images table by using the id from the users table and the user_id in images.
-    $statement = $pdo -> prepare ('SELECT users.id, users.username, users.fname, users.lname, images.filename, images.text, images.created_at FROM users LEFT JOIN images ON users.id = images.user_id');
+    $statement = $pdo -> prepare ('SELECT users.id, users.username, users.fname, users.lname, images.filename, images.text, images.created_at FROM users JOIN images WHERE users.id = images.user_id');
 
     $statement->execute();
 

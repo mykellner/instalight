@@ -42,9 +42,10 @@
 
         </ul>
 
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-secondary mr-sm-2" type="submit">Search</button>
+
+        <form class="form-inline" action="searchresults.php" method="POST">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search users" name="query">
+            <button class="btn btn-secondary mr-sm-2" type="submit-search">Search</button>
         </form>
     </div>
 </nav>
