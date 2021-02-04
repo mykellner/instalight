@@ -2,6 +2,7 @@
 
 require_once 'check_login.php';
 require_once 'config.php';
+include 'templates/header.php';
 
 $mess = isset($_GET['mess']) ? "<p class='text-error'>" . $_GET['mess'] . "</p>" : "";
 
