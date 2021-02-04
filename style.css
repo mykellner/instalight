@@ -2,6 +2,7 @@
 
 body { 
   padding-top: 70px;
+  background-color: #fafafa;
 }
 
 /* Login Form */
@@ -132,22 +133,50 @@ body {
 
 .feed-picture img {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   object-fit: cover;
 }
 
+.card-text {
+  margin: 0px 17px 10px 17px;
+}
+
+.card-text:last-child {
+  margin-bottom: 10px;
+}
+
+.card {
+  margin: 10px 0 10px 0;
+} 
 
 .card-body {
   padding: 0;
+}
+
+.card-header {
+  background-color: #fff;
+}
+
+.card-footer {
+  background-color: #fff;
+}
+
+.feed-link {
+  font-weight: 800;
+  text-decoration: none;
+  color: black;
+}
+
+.feed-link:hover {
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .container-feed {
   max-width: 700px;
   margin: 0 auto;
 }
-.card {
-  margin: 10px 0 10px 0;
-} 
+
 
 .body-loggin {
   margin-left: 30px;
