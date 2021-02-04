@@ -1,0 +1,153 @@
+/* Body */
+
+body { 
+  padding-top: 70px;
+}
+
+/* Login Form */
+
+.signup-form h2 {
+    font-size: 30px;
+    text-align: center;
+    color: #939b9a;
+    margin-bottom: 10px;
+  }
+  
+  .signup-form .social-icon {
+    width: 100%;
+    font-size: 20px;
+    padding-top: 20px;
+    color: #fff;
+    text-align: center;
+    float: left;
+  }
+  .signup-form {
+      background: #fff;
+      width: 450px;
+      border-radius: 6px;
+      margin: 0 auto;
+      display: table;
+      padding: 15px 30px 30px;
+      margin-top: 100px;
+      box-sizing: border-box;
+  }
+  .form-group {
+    float: left;
+    width: 100%;
+    margin: 0 0 15px;
+    position: relative;
+  }
+  .signup-form input {
+      width: 100%;
+      padding: 3px;
+      height: 40px;
+      
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 15px;
+      padding-left: 50px;
+  }
+  
+  .signup-form .form-group .input-icon {
+      font-size: 15px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      align-items: center;
+      position: absolute;
+      border-radius: 25px;
+      bottom: 0px;
+      height: 100%;
+      padding-left: 20px;
+      color: #666;
+  }
+  
+  .signup-form .create-acc {
+    float: left;
+    width: 100%;
+    text-decoration: none;
+    color: #363a3a;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 11px;
+  }
+  .login-form .social-icon button {
+      font-size: 20px;
+      color: white;
+      height: 50px;
+      width: 50px;
+      background: #45aba6;
+      border-radius: 60%;
+      margin: 0px 10px;
+      border: none;
+      cursor: pointer;
+  }
+  .signup-form button:hover{
+    opacity: 0.9;
+  }
+  .signup-form .seperator {
+    float: left;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    margin: 50px 0 0;
+  }
+  .signup-form .seperator b {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 40px;
+    background: #fff;
+    display: inline-block;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    position: relative;
+    top: -22px;
+    z-index: 1;
+  }
+  .signup-form p {
+    float: left;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    margin: 0 0 10px;
+  }
+  
+  .signup-form .btn {
+      width: 100%;
+  
+  }
+
+  /* navbar */
+.navbar-brand {
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+}
+
+/* Feed */
+.feed-picture img {
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.container-feed {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.card {
+  margin: 10px 0 10px 0;
+} 
+
+.body-loggin {
+  margin-left: 30px;
+  margin-top: 50px;
+}
+.h1-header {
+  margin-left: 7px;
+}
+
+/* Footer */
