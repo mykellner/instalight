@@ -19,6 +19,7 @@
 </head>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+<div class="container">
     <a class="navbar-brand mr-auto" href="feed.php">Instalight</a>
 
     <!-- If you're on a small screen the menu will collapse -->
@@ -50,7 +51,7 @@
         </ul>
     </div>
 </nav>
-
+</div>
 
 <!-- Start container, base on every page -->
 <div class="container">
