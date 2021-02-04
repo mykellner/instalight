@@ -30,15 +30,12 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-                <a class="nav-link" href="feed.php">Feed</a>
+                <a class="nav-link" href="index.php">Log In</a>
             </li>
 
         </ul>
 
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-secondary mr-sm-2" type="submit">Search</button>
-        </form>
+       
     </div>
 </nav>
 

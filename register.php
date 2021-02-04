@@ -5,6 +5,7 @@ session_start();
 require 'config.php';
 
 $conn = initDatabase();
+
  
 $usernameErr = $emailErr = $passErr = $cpassErr = "";
 $username = $email = $fname = $lname = $password = $confirm_password = "";
@@ -118,7 +119,7 @@ if(empty($usernameErr) && empty($emailErr) && empty($passErr) && empty($cpassErr
  $_SESSION['username'] = $username;
  $_SESSION['role'] = $res['role'];
  $_SESSION['logged_in'] = true;
- header("location: loggedin.php");
+ header("location: feed.php");
  } else{
  echo "Something went wrong. Please try again later.";
  }
