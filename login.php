@@ -19,7 +19,6 @@ $res = $stm->fetch(PDO::FETCH_ASSOC);
         $_SESSION['id'] = $res['id'];
         $_SESSION['username'] = $username;
         $_SESSION['role'] = $res['role'];
-        $_SESSION['logged_in'] = true;
         header('location: loggedin.php');
         }else{
         header('location: index.php?mess=Du har angivit felaktiga inloggningsuppgifter.');
