@@ -1,17 +1,16 @@
 <?php
+function initDatabase () {
 
-$database = [
-    'host' => '127.0.0.1',
-    'name' => 'instalight',
-    'user' => 'root',
-    'password' => 'mysql'
-];
-
-function initDatabase($database)
-{
-    try {
-        return new PDO("mysql:host={$database['host']};dbname={$database['name']}", $database['user'], $database['password']);
-    } catch (PDOException $e) {
-        var_dump($e->getMessage());
+try {
+    return new PDO('mysql:host=127.0.0.1;dbname=instalight', 'root', '');
+    
+    echo "Connected to DB";
+    
+    } catch(PDOException $e){
+        var_dump($e); 
     }
+
 }
+
+
+$pdo = initDatabase();

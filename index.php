@@ -1,46 +1,27 @@
+
 <?php
 
-$mess = "";
+session_start();
 
-$mess = isset($_GET['mess']) ? "<p class='text-error'>" . $_GET['mess'] . "</p>" : "";
+include 'templates/header-notsignedin.php';
+
 ?>
 
-<!DOCTYPE html>
-<html lang="sv">
+  <div class="signup-form">
+    <form action="login.php" method="POST">
+     <h2 class="login">Login</h2>
+      <div class="form-group">
+        <input class="form-control" type="email" name="email" placeholder="E-mail Address">
+        <span class="input-icon"><i class="fas fa-envelope"></i></span>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" name="password" placeholder="Password">
+        <span class="input-icon"><i class="fas fa-key"></i></span>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Instalight</title>
-    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
+      </div>      
+      <button type="submit" name="submit-login" class="btn btn-primary">Login</button>      
+      <a class="create-acc" href="sign-up.php">Create new account</a>
 
-<body class="body-loggin">
-    <div class="container">
-        <div>
-            <h1 class="h1-header">Instalight</h1>
-            <div class="column col-3">
-                <?php echo $mess; ?>
-                <form method="POST" action="login.php">
-                    <div class="form-group">
-                        <label class="form-label" for="username">Username</label>
-                        <input class="form-input" id="username" name="username" type="text" placeholder="Email" required>
-                        <label class="form-label" for="password">Password</label>
-                        <input class="form-input" id="password" name="password" type="password" placeholder="Password" required>
-                        <label class="form-checkbox">
-                            <input type="checkbox" name="keepLoggedIn">
-                            <i class="form-icon"></i> Keep me logged in
-                        </label>
-                        <input class="button" type="submit" value="Logga in">
-                        <p></p>
-                        <?php session_abort() ?>
-                        <a class="button" href="register.php">Sign up</a>
+    </form>
+  </div>
 
-                        <div class="text-sm"></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
