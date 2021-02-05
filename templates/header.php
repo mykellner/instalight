@@ -19,6 +19,7 @@
 </head>
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+<div class="container">
     <a class="navbar-brand mr-auto" href="feed.php">Instalight</a>
 
     <!-- If you're on a small screen the menu will collapse -->
@@ -33,19 +34,24 @@
                 <a class="nav-link" href="feed.php">Feed</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="profile.php">Profile</a>
+                <a class="nav-link" href="profile.php">My Profile</a>
             </li>
-            
-
+           
         </ul>
 
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-secondary mr-sm-2" type="submit">Search</button>
+        <form class="form-inline" action="searchresults.php" method="POST">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search users" name="query">
+            <button class="btn btn-secondary mr-sm-2" type="submit-search">Search</button>
         </form>
+
+        <ul class="navbar-nav">
+        <li class="nav-item">
+                <a class="nav-link" href="logout.php">Log Out</a>
+            </li>
+        </ul>
     </div>
 </nav>
-
+</div>
 
 <!-- Start container, base on every page -->
 <div class="container">

@@ -2,25 +2,23 @@
 
 session_start();
 
-require_once ('config.php');
+require 'config.php';
 
+$statement = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+$statement->bindParam('email', $_POST['email']);
+$statement->execute();
 
-$username = trim($_POST['username']);
-$password = trim($_POST['password']);
-$fname = trim($_POST['fname']);
+$user = $statement->fetch(PDO::FETCH_ASSOC);
 
-$sql = "SELECT * FROM users WHERE email = :email AND password = :password";
-$stm = initDatabase($database)->prepare($sql);
-$stm->execute(array('email' => $username, 'password' => $password));
-$res = $stm->fetch(PDO::FETCH_ASSOC);
-
-
-    if(isset($res['id'])){
-        $_SESSION['id'] = $res['id'];
-        $_SESSION['username'] = $username;
-        $_SESSION['role'] = $res['role'];
-        $_SESSION['logged_in'] = true;
-        header('location: loggedin.php');
-        }else{
-        header('location: index.php?mess=Du har angivit felaktiga inloggningsuppgifter.');
-        }
+if(password_verify($_POST['password'], $user['password'])){
+    session_regenerate_id();
+    $_SESSION['logged_in'] = true;
+    $_SESSION['username'] = $user['username'];
+    $_SESSION['fname'] = $user['fname'];
+    $_SESSION['lname'] = $user['lname'];
+    $_SESSION['userid'] = $user['id'];
+    $_SESSION['email'] = $user['email'];
+    header('Location: feed.php');
+} else {
+    header('Location: index.php');
+}
