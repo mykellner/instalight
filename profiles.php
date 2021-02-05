@@ -71,8 +71,8 @@ include 'templates/header.php';
     <div class="col-6">
         <?php foreach ($thisUser as $user) : ?>
             <h3><?php echo $user['username'] ?></h3>
-            <?php echo $user['fname'] . " " . $user['lname'] ?>
-            <p> Posts </i> <b><?php echo $userAmount; ?></b></p>
+            <p><?php echo $user['fname'] . " " . $user['lname'] ?></p>
+            <p> <b><?php echo $userAmount; ?></b> Posts </p>
         <?php endforeach; ?>
     </div>
 
