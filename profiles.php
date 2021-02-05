@@ -62,10 +62,15 @@ include 'templates/header.php';
 ?>
 
 <div class="row profile-header">
-<div class="col-12">
+<div class="col-12 d-flex justify-content-between"">
 <?php foreach ($thisUser as $user) : ?>
     <h3><?php echo $user['username'] ?></h3>
 <?php endforeach; ?> 
+<?php if(isset($_SESSION['search'])) : ?>
+
+<a class="results" href="searchresults.php">Back to search</a>
+
+<?php endif; ?>
 </div></div>
 
 <div class="row profile-info">
