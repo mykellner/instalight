@@ -8,7 +8,7 @@ $userid = $_GET['user'];
 
 $thisUser = getUserById($pdo, $userid);
 $userImages = getUserImages($pdo, $userid);
-$userAmount = getAmountOfPictures($pdo,$userid);
+$userAmount = getAmountOfPictures($pdo, $userid);
 
 
 
@@ -43,7 +43,8 @@ function getUserById($pdo, $id)
 }
 
 
-function getAmountOfPictures($pdo, $userid){
+function getAmountOfPictures($pdo, $userid)
+{
 
 
     $sql = 'SELECT COUNT(*) FROM images as TOTAL WHERE user_id = :id';
@@ -54,7 +55,6 @@ function getAmountOfPictures($pdo, $userid){
     ]);
 
     return ($statement->fetchColumn());
-
 }
 
 include 'templates/header.php';
@@ -62,21 +62,22 @@ include 'templates/header.php';
 ?>
 
 <div class="row profile-header">
-<div class="col-12">
-<?php foreach ($thisUser as $user) : ?>
-    <h3><?php echo $user['username'] ?></h3>
-<?php endforeach; ?> 
-</div></div>
+    <div class="col-3">
+        <?php foreach ($thisUser as $user) : ?>
+            <img class="profile-picture" src="profile-images/<?php echo $user['profile_img'] ?>">
+        <?php endforeach; ?>
+    </div>
 
-<div class="row profile-info">
-    <div class="col-4">
-<p class="userinfo"> <?php foreach ($thisUser as $user) : ?>
-        <?php echo $user['fname'] . " " . $user['lname'] ?>
-    <?php endforeach; ?> </p>
+    <div class="col-6">
+        <?php foreach ($thisUser as $user) : ?>
+            <h3><?php echo $user['username'] ?></h3>
+            <?php echo $user['fname'] . " " . $user['lname'] ?>
+            <p> Posts </i> <b><?php echo $userAmount; ?></b></p>
+        <?php endforeach; ?>
+    </div>
 
 </div>
-  <p> Posts </i> <b><?php echo $userAmount; ?></b></p>
-</div>
+
 
 <div class="row profile-images-feed">
     <?php foreach ($userImages as $image) : ?>

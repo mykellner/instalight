@@ -215,6 +215,15 @@ body {
 
 /* Profiles */
 
+.profile-picture {
+  object-fit: cover;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;   
+    margin: 0px 10px 0px 0px;
+    border: 1px solid rgba(0,0,0,0.125);
+}
+
 .profile-images {
   max-width: 450px;
   padding-bottom: 30px;
@@ -229,6 +238,10 @@ body {
 .profile-images-feed{
   padding-top: 20px;
   border-top: 1px solid rgba(0,0,0,0.125);
+}
+
+.profile-header {
+  margin: 20px 0 20px 0;
 }
 
 .profile-header h3{
