@@ -29,6 +29,8 @@ function getSearch($pdo)
 
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+
+
     return $results;
 }
 
