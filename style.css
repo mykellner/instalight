@@ -227,6 +227,12 @@ body {
 .profile-images {
   max-width: 450px;
   padding-bottom: 30px;
+  
+}
+
+.profile-images img:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .profile-images img {
