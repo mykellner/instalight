@@ -1,37 +1,73 @@
-<?php 
+<?php
 
 include 'templates/header.php';
 require 'config.php';
 
-function getSearch($pdo) {
+if(isset($_POST['submit-search'])) {
+    unset($_SESSION['query']);
+    unset($_SESSION['search']);
+}
+
+
+function getSearch($pdo)
+{
 
     $sql = 'SELECT * FROM users WHERE username LIKE ? OR fname LIKE ? OR lname LIKE ?';
     $statement = $pdo->prepare($sql);
+
+    if(isset($_SESSION['query'])) {
+        $query = $_SESSION['query'];
+    } else {
+        $query = $_POST['query'];
+    }
+
     $statement->execute([
-        "%" .$_POST['query']. "%",
-        "%" .$_POST['query']. "%",
-        "%" .$_POST['query']. "%"
+        "%" . $query . "%",
+        "%" . $query . "%",
+        "%" . $query . "%"
     ]);
-    
+
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     return $results;
-    
-    }
+}
 
 $search = getSearch($pdo);
 
 
+if(!empty($_POST['query'])) {
+
+    $_SESSION['query'] = $_POST['query'];
+}
+
+$_SESSION['search'] = true;
+
+
+
+
 ?>
 
-<div>
+<?php if(empty($search)) : ?>
 
-<?php foreach($search as $result) : ?>
+    <h2 class="noresult">No results..</h2>
 
-<a href="profiles.php?user=<?php echo $result['id']; ?>"><?php echo $result['username']?></a>
+<?php endif; ?>
 
-<?php endforeach; ?>
+<div class="row">
 
+    <?php foreach ($search as $result) : ?>
+
+        <div class="search-images">
+
+            <div class="searchinfo d-flex">
+            <a class="searchusername" href="profiles.php?user=<?php echo $result['id']; ?>"><?php echo $result['username'] ?></a>
+            <p class="searchname"> ( <?php echo $result['fname'] . " " . $result['lname']?> )</p>
+            </div>
+            <img class="profileimages" src="https://via.placeholder.com/150" alt="/images/<?php echo $result['profile_img']; ?>">
+
+
+        </div>
+
+    <?php endforeach; ?>
 
 </div>
-
