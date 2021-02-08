@@ -48,6 +48,50 @@ function getSearch($pdo) {
     
     }
     
+include 'config.php';
 
+$myid = 4;
+
+$myFriends = checkFriends($pdo, $myid);
+$stringFriends = array_values($myFriends);
+
+function checkFriends ($pdo, $userid) {
+
+    $sql = 'SELECT DISTINCT friendID FROM follows WHERE user_ID = :user_id';
+
+    $statement = $pdo->prepare($sql);
+    $statement->execute([
+        'user_id' => $userid,
+        
+    ]);
+
+    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    $friends = [];
+
+    foreach($results as $result) {
+        array_push($friends, $result['friendID']);
+    }
+
+    return $friends;
+
+
+}
+
+$infopictures = getPicturesFromFriends($pdo, $stringFriends);
+print_r($infopictures);
+
+function getPicturesFromFriends($pdo, $stringFriends)
+{ $in  = str_repeat('?,', count($stringFriends) - 1) . '?';
+    
+  $statement = $pdo->prepare("SELECT users.id, users.username, users.fname, users.lname, users.profile_img, images.filename, images.text, images.created_at FROM users JOIN images ON users.id = images.user_id WHERE users.id IN ($in)");
+
+    $statement->execute(
+    $stringFriends
+  );
+
+  $users = $statement->fetchAll(PDO::FETCH_ASSOC); 
+  return $users;
+}
 
   

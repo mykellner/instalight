@@ -2,6 +2,7 @@
 
 session_start();
 include 'config.php';
+
 // is the person logged in?
 if (!isset($_SESSION['logged_in'])) {
   // if not, show
@@ -11,33 +12,56 @@ if (!isset($_SESSION['logged_in'])) {
   include "templates/header.php";
 }
 
-if (isset($_SESSION['search'])) {
+if(isset($_SESSION['search'])) {
   unset($_SESSION['search']);
   unset($_SESSION['query']);
 
 }
 
-$image_id = $_GET['img'];
+$myid = $_SESSION['userid'];
 
+$myFriends = checkFriends($pdo, $myid);
+$stringFriends = array_values($myFriends);
 
-// function to get all users from datebase
-function getPicturesFromUser($pdo)
-{
+function checkFriends ($pdo, $userid) {
 
-  // combine the users and images table by using the id from the users table and the user_id in images.
-  $statement = $pdo->prepare('SELECT users.id, users.username, users.fname, users.lname, users.profile_img, images.image_id, images.filename, images.text, images.created_at FROM users JOIN images WHERE users.id = images.user_id');
+    $sql = 'SELECT friendID FROM follows WHERE user_ID = :user_id';
 
-  $statement->execute();
+    $statement = $pdo->prepare($sql);
+    $statement->execute([
+        'user_id' => $userid,
+        
+    ]);
 
-  $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-  foreach ($users as $index => $user){
-    if(empty($user['profile_img'])) {
-        $users[$index]['profile_img'] = '/default.png';
+    $friends = [];
+
+    foreach($results as $result) {
+        array_push($friends, $result['friendID']);
     }
+
+    return $friends;
+
+
 }
+
+$users = getPicturesFromFriends($pdo, $stringFriends);
+
+
+function getPicturesFromFriends($pdo, $stringFriends)
+{ $in  = str_repeat('?,', count($stringFriends) - 1) . '?';
+    
+  $statement = $pdo->prepare("SELECT users.id, users.username, users.fname, users.lname, users.profile_img, images.filename, images.text, images.created_at FROM users JOIN images ON users.id = images.user_id WHERE users.id IN ($in)");
+
+    $statement->execute(
+    $stringFriends
+  );
+
+  $users = $statement->fetchAll(PDO::FETCH_ASSOC); 
   return $users;
 }
+
 
 
 function get_timeago($ptime)
@@ -66,8 +90,6 @@ function get_timeago($ptime)
   }
 }
 
-$users = getPicturesFromUser($pdo);
-
 ?>
 
 <div class="container-feed">
@@ -83,9 +105,10 @@ $users = getPicturesFromUser($pdo);
               <h5 class="card-header">
                 <img class="profile-img" src="profile-images/<?php echo $user['profile_img']?>"><a  href="profiles.php?user=<?php echo $user['id']; ?>"><?= $user['username'] ?></a>
               </h5>
-              <a class="feed-picture" href="image.php?img=<?php echo $user['image_id']?>"> 
-                <img src='images/<?php echo $user['filename'] ?>'>
               </a>
+              <div class="feed-picture">
+                <img src='images/<?php echo $user['filename'] ?>'>
+              </div>
               <p class="card-text"> <a class="feed-link" href="profiles.php?user=<?php echo $user['id']; ?>"> <?= $user['username'] ?></a> &nbsp;<?= $user['text'] ?> </p>
             </div>
             <div class="card-footer text-muted">
