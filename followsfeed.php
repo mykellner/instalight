@@ -2,6 +2,7 @@
 
 session_start();
 include 'config.php';
+
 // is the person logged in?
 if (!isset($_SESSION['logged_in'])) {
   // if not, show
@@ -17,19 +18,50 @@ if(isset($_SESSION['search'])) {
 
 }
 
-// function to get all users from datebase
-function getPicturesFromUser($pdo)
-{
+$myid = $_SESSION['userid'];
 
-  // combine the users and images table by using the id from the users table and the user_id in images.
-  $statement = $pdo->prepare('SELECT users.id, users.username, users.fname, users.lname, users.profile_img, images.filename, images.text, images.created_at FROM users JOIN images WHERE users.id = images.user_id');
+$myFriends = checkFriends($pdo, $myid);
+$stringFriends = array_values($myFriends);
 
-  $statement->execute();
+function checkFriends ($pdo, $userid) {
 
-  $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $sql = 'SELECT friendID FROM follows WHERE user_ID = :user_id';
 
+    $statement = $pdo->prepare($sql);
+    $statement->execute([
+        'user_id' => $userid,
+        
+    ]);
+
+    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    $friends = [];
+
+    foreach($results as $result) {
+        array_push($friends, $result['friendID']);
+    }
+
+    return $friends;
+
+
+}
+
+$users = getPicturesFromFriends($pdo, $stringFriends);
+
+
+function getPicturesFromFriends($pdo, $stringFriends)
+{ $in  = str_repeat('?,', count($stringFriends) - 1) . '?';
+    
+  $statement = $pdo->prepare("SELECT users.id, users.username, users.fname, users.lname, users.profile_img, images.filename, images.text, images.created_at FROM users JOIN images ON users.id = images.user_id WHERE users.id IN ($in)");
+
+    $statement->execute(
+    $stringFriends
+  );
+
+  $users = $statement->fetchAll(PDO::FETCH_ASSOC); 
   return $users;
 }
+
 
 
 function get_timeago($ptime)
@@ -57,8 +89,6 @@ function get_timeago($ptime)
     }
   }
 }
-
-$users = getPicturesFromUser($pdo);
 
 ?>
 
