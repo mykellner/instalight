@@ -71,8 +71,7 @@ function unFollow($pdo, $userid, $friendID) {
     $follows = 'false';
 }
 
-function getUserImages($pdo, $userid)
-{
+function getUserImages($pdo, $userid) {
 
     $sql = 'SELECT * FROM users
     JOIN images
@@ -85,14 +84,10 @@ function getUserImages($pdo, $userid)
     ]);
 
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-
     return $results;
 }
 
-
-
-function getUserById($pdo, $id)
-{
+function getUserById($pdo, $id) {
 
     $statement = $pdo->prepare('SELECT * FROM users WHERE id = :id');
     $statement->execute([
@@ -143,22 +138,22 @@ include 'templates/header.php';
             <p class="bio"><?php echo $user['bio'] ?></p>
 
             <p> <b><?php echo $userAmount; ?></b> Posts </p>
-
+            
+            <?php if($follows == 'false') : ?>
+            <form method="POST">
+                <button type="submit" name="submit-follow" class="btn btn-primary btn-sm">Follow</button>
+            </form>
+            <?php endif; ?>
+            
             <?php if($follows == 'true') : ?>
             
             <form method="POST">
-            <button type="submit" name="submit-unfollow" class="btn btn-primary btn-sm">Unfollow</button>
+                <button type="submit" name="submit-unfollow" class="btn btn-primary btn-sm">Unfollow</button>
             </form>
 
             <?php endif; ?>
 
-            <?php if($follows == 'false') : ?>
-            
-            <form method="POST">
-            <button type="submit" name="submit-follow" class="btn btn-primary btn-sm">Follow</button>
-            </form>
-
-            <?php endif; ?>
+          
         <?php endforeach; ?> 
     </div>
 
@@ -185,8 +180,4 @@ include 'templates/header.php';
     <?php endforeach; ?>
 </div>
 
-
-
-</body>
-
-</html>
+<?php include 'templates/footer.php' ?>
