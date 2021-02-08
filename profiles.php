@@ -69,6 +69,7 @@ include 'templates/header.php';
 ?>
 
 <div class="row profile-header">
+
     <div class="col-3">
         <?php foreach ($thisUser as $user) : ?>
             <img class="profile-picture" src="profile-images/<?php echo $user['profile_img'] ?>">
@@ -82,6 +83,14 @@ include 'templates/header.php';
             <p> <b><?php echo $userAmount; ?></b> Posts </p>
         <?php endforeach; ?>
     </div>
+
+<?php if(isset($_SESSION['search'])) : ?>
+
+<a class="results" href="searchresults.php">Back to search</a>
+
+<?php endif; ?>
+
+
 
 </div>
 

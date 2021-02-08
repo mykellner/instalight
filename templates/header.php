@@ -1,4 +1,14 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+if (!isset($_SESSION['logged_in'])) {
+    header('Location: index.php');
+    exit;
+}
+
+
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +51,7 @@
 
         <form class="form-inline" action="searchresults.php" method="POST">
             <input class="form-control mr-sm-2" type="text" placeholder="Search users" name="query">
-            <button class="btn btn-secondary mr-sm-2" type="submit-search">Search</button>
+            <button class="btn btn-secondary mr-sm-2" type="submit-search" name="submit-search">Search</button>
         </form>
 
         <ul class="navbar-nav">

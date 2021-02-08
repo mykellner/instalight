@@ -11,6 +11,12 @@ if (!isset($_SESSION['logged_in'])) {
   include "templates/header.php";
 }
 
+if(isset($_SESSION['search'])) {
+  unset($_SESSION['search']);
+  unset($_SESSION['query']);
+
+}
+
 // function to get all users from datebase
 function getPicturesFromUser($pdo)
 {

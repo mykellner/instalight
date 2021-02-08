@@ -253,3 +253,37 @@ body {
 .profile-header h3{
   margin-top: 40px;
 }
+
+.search-images {
+  max-width: 200px;
+  margin: 10px;
+ 
+}
+
+.search-images img {
+  object-fit: cover;
+  width: 200px;
+  
+}
+
+.searchusername {
+  font-size: 18px;
+}
+
+.searchname {
+  font-size: 12px;
+  margin-bottom: 3px;
+  margin-left: 5px;
+  align-self: flex-end;
+}
+
+.noresult {
+  padding: 20px;
+
+}
+
+.results {
+  margin-top: 15px;
+  font-style: oblique;
+  font-size: 17px;
+}
