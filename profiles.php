@@ -96,7 +96,8 @@ include 'templates/header.php';
 
 
 <div class="row profile-images-feed">
-    <?php foreach ($userImages as $image) : ?>
+
+    <?php foreach (array_reverse($userImages) as $image) : ?>
         <div class="col-4">
             <div class="profile-images">
             <a class="feed-image" href="image.php?img=<?php echo $image['id']; ?>"> 
