@@ -28,6 +28,12 @@ function getPicturesFromUser($pdo)
 
   $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+  foreach ($users as $index => $user){
+    if(empty($user['profile_img'])) {
+        $users[$index]['profile_img'] = '/default.png';
+    }
+}
+
   return $users;
 }
 

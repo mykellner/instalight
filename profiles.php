@@ -43,7 +43,7 @@ function getUserById($pdo, $id)
     // loop to see if file_name is empty, if it is, a deafult picture will be added.
     foreach ($users as $index => $user){
         if(empty($user['profile_img'])) {
-            $users[$index]['profile_img'] = 'default.png';
+            $users[$index]['profile_img'] = '/default.png';
         }
     }
     return $users;
