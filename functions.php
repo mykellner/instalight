@@ -47,4 +47,7 @@ function getSearch($pdo) {
     return $results;
     
     }
+    
 
+
+  
