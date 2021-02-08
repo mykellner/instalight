@@ -11,18 +11,21 @@ if (!isset($_SESSION['logged_in'])) {
   include "templates/header.php";
 }
 
-if(isset($_SESSION['search'])) {
+if (isset($_SESSION['search'])) {
   unset($_SESSION['search']);
   unset($_SESSION['query']);
 
 }
+
+$image_id = $_GET['img'];
+
 
 // function to get all users from datebase
 function getPicturesFromUser($pdo)
 {
 
   // combine the users and images table by using the id from the users table and the user_id in images.
-  $statement = $pdo->prepare('SELECT users.id, users.username, users.fname, users.lname, users.profile_img, images.filename, images.text, images.created_at FROM users JOIN images WHERE users.id = images.user_id');
+  $statement = $pdo->prepare('SELECT users.id, users.username, users.fname, users.lname, users.profile_img, images.id, images.filename, images.text, images.created_at FROM users JOIN images WHERE users.id = images.user_id');
 
   $statement->execute();
 
@@ -33,7 +36,6 @@ function getPicturesFromUser($pdo)
         $users[$index]['profile_img'] = '/default.png';
     }
 }
-
   return $users;
 }
 
@@ -79,10 +81,9 @@ $users = getPicturesFromUser($pdo);
               <h5 class="card-header">
                 <img class="profile-img" src="profile-images/<?php echo $user['profile_img']?>"><a  href="profiles.php?user=<?php echo $user['id']; ?>"><?= $user['username'] ?></a>
               </h5>
-              </a>
-              <div class="feed-picture">
+              <a class="feed-picture" href="image.php?img=<?php echo $user['id']?>"> 
                 <img src='images/<?php echo $user['filename'] ?>'>
-              </div>
+              </a>
               <p class="card-text"> <a class="feed-link" href="profiles.php?user=<?php echo $user['id']; ?>"> <?= $user['username'] ?></a> &nbsp;<?= $user['text'] ?> </p>
             </div>
             <div class="card-footer text-muted">
