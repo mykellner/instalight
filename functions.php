@@ -47,14 +47,4 @@ function getSearch($pdo) {
     return $results;
     
     }
-    
-    function addToFollow($pdo, $userid, $friendID) {
-        $sql = 'INSERT INTO follows (user_id, friendID) VALUES (:user_id, :friendID)';
 
-        $statement = $pdo->prepare($sql);
-        $statement->execute([
-            'user_id' => $userid,
-            'friendID' => $friendID,
-        ]);
-    }
-    
