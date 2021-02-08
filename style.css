@@ -131,8 +131,6 @@ body {
 
 /* Feed */
 
-
-
 .profile-img {
     object-fit: cover;
     border-radius: 50%;
@@ -251,19 +249,27 @@ body {
 }
 
 .profile-header h3{
-  margin-top: 40px;
+  margin-top: 30px;
+}
+
+.profile-header p {
+  margin-bottom: 5px;
+}
+
+.bio {
+  font-size: 13px;
+  margin-bottom: 10px !important;
+  font-style: italic;
 }
 
 .search-images {
   max-width: 200px;
   margin: 10px;
- 
 }
 
 .search-images img {
   object-fit: cover;
   width: 200px;
-  
 }
 
 .searchusername {
@@ -286,4 +292,27 @@ body {
   margin-top: 15px;
   font-style: oblique;
   font-size: 17px;
+}
+
+/* Image Page */
+
+.comment-box {
+  margin: 0px;
+  height: 100%;
+}
+
+.images {
+  margin-top: 40px;
+}
+
+.picture img {
+  object-fit: cover;
+  width: 500px;
+}
+.picture {
+  max-width: 500px;
+}
+
+.comment-box .card-text {
+  margin-top: 10px;
 }
