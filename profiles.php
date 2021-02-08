@@ -79,6 +79,8 @@ include 'templates/header.php';
         <?php foreach ($thisUser as $user) : ?>
             <h3><?php echo $user['username'] ?> </h3> 
             <p><?php echo $user['fname'] . " " . $user['lname'] ?></p>
+            <p class="bio"><?php echo $user['bio'] ?></p>
+
             <p> <b><?php echo $userAmount; ?></b> Posts </p>
             <button type="button" class="btn btn-primary btn-sm">Follow</button>
         <?php endforeach; ?> 
