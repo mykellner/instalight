@@ -131,14 +131,28 @@ body {
 
 /* Feed */
 
+
+
+.profile-img {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;   
+    margin: 0px 10px 0px 0px;
+    border: 1px solid rgba(0,0,0,0.125);
+
+}
+
 .feed-picture img {
   width: 100%;
   margin-bottom: 10px;
   object-fit: cover;
+  border-bottom: 1px solid rgba(0,0,0,0.125);
 }
 
 .card-text {
   margin: 0px 17px 10px 17px;
+  color: #343a40;
 }
 
 .card-text:last-child {
@@ -149,12 +163,19 @@ body {
   margin: 10px 0 10px 0;
 } 
 
+.card a {
+  text-decoration: none;
+  color: #343a40;
+}
+
 .card-body {
   padding: 0;
 }
 
 .card-header {
   background-color: #fff;
+  font-size: 16px;
+  padding: 0.75rem 1rem;
 }
 
 .card-footer {
@@ -194,9 +215,24 @@ body {
 
 /* Profiles */
 
+.profile-picture {
+  object-fit: cover;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;   
+    margin: 0px 10px 0px 0px;
+    border: 1px solid rgba(0,0,0,0.125);
+}
+
 .profile-images {
   max-width: 450px;
   padding-bottom: 30px;
+  
+}
+
+.profile-images img:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .profile-images img {
@@ -208,6 +244,10 @@ body {
 .profile-images-feed{
   padding-top: 20px;
   border-top: 1px solid rgba(0,0,0,0.125);
+}
+
+.profile-header {
+  margin: 20px 0 20px 0;
 }
 
 .profile-header h3{
