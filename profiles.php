@@ -9,8 +9,67 @@ $userid = $_GET['user'];
 $thisUser = getUserById($pdo, $userid);
 $userImages = getUserImages($pdo, $userid);
 $userAmount = getAmountOfPictures($pdo, $userid);
+$myid = $_SESSION['userid'];
+checkIfFollow($pdo, $myid, $userid);
+$follows;
+
+function checkIfFollow ($pdo, $userid, $friendID) {
+
+    $sql = 'SELECT id FROM follows WHERE user_ID = :user_id AND friendID = :friendID';
+
+    $statement = $pdo->prepare($sql);
+    $statement->execute([
+        'user_id' => $userid,
+        'friendID' => $friendID,
+    ]);
 
 
+    global $follows;
+    if($statement->rowCount() > 1){
+        $follows = 'true';
+        } else {
+            $follows = 'false';
+        }
+
+
+}
+
+
+if(isset($_POST['submit-follow'])) {
+
+    addToFollow($pdo, $myid, $userid);
+}
+
+function addToFollow($pdo, $userid, $friendID) {
+    $sql = 'INSERT INTO follows (user_id, friendID) VALUES (:user_id, :friendID)';
+
+    $statement = $pdo->prepare($sql);
+    $statement->execute([
+        'user_id' => $userid,
+        'friendID' => $friendID,
+    ]);
+
+    global $follows;
+    $follows = 'true';
+}
+
+if(isset($_POST['submit-unfollow'])) {
+
+    unFollow($pdo, $myid, $userid);
+}
+
+function unFollow($pdo, $userid, $friendID) {
+    $sql = 'DELETE FROM follows WHERE user_id = :user_id AND friendID = :friendID';
+
+    $statement = $pdo->prepare($sql);
+    $statement->execute([
+        'user_id' => $userid,
+        'friendID' => $friendID,
+    ]);
+
+    global $follows;
+    $follows = 'false';
+}
 
 function getUserImages($pdo, $userid)
 {
@@ -29,6 +88,8 @@ function getUserImages($pdo, $userid)
 
     return $results;
 }
+
+
 
 function getUserById($pdo, $id)
 {
@@ -82,7 +143,22 @@ include 'templates/header.php';
             <p class="bio"><?php echo $user['bio'] ?></p>
 
             <p> <b><?php echo $userAmount; ?></b> Posts </p>
-            <button type="button" class="btn btn-primary btn-sm">Follow</button>
+
+            <?php if($follows == 'true') : ?>
+            
+            <form method="POST">
+            <button type="submit" name="submit-unfollow" class="btn btn-primary btn-sm">Unfollow</button>
+            </form>
+
+            <?php endif; ?>
+
+            <?php if($follows == 'false') : ?>
+            
+            <form method="POST">
+            <button type="submit" name="submit-follow" class="btn btn-primary btn-sm">Follow</button>
+            </form>
+
+            <?php endif; ?>
         <?php endforeach; ?> 
     </div>
 
