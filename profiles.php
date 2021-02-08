@@ -15,7 +15,7 @@ $userAmount = getAmountOfPictures($pdo, $userid);
 function getUserImages($pdo, $userid)
 {
 
-    $sql = 'SELECT * FROM users
+    $sql = 'SELECT filename FROM users
     JOIN images
     ON users.id = images.user_id
     WHERE users.id = :id';
@@ -53,6 +53,7 @@ function getUserById($pdo, $id)
 function getAmountOfPictures($pdo, $userid)
 {
 
+
     $sql = 'SELECT COUNT(*) FROM images as TOTAL WHERE user_id = :id';
 
     $statement = $pdo->prepare($sql);
@@ -77,16 +78,15 @@ include 'templates/header.php';
 
     <div class="col-6">
         <?php foreach ($thisUser as $user) : ?>
-            <h3><?php echo $user['username'] ?> </h3> 
+            <h3><?php echo $user['username'] ?></h3>
             <p><?php echo $user['fname'] . " " . $user['lname'] ?></p>
             <p> <b><?php echo $userAmount; ?></b> Posts </p>
-            <button type="button" class="btn btn-primary btn-sm">Follow</button>
-        <?php endforeach; ?> 
+        <?php endforeach; ?>
     </div>
 
 <?php if(isset($_SESSION['search'])) : ?>
 
-    <a class="results" href="searchresults.php">Back to search</a>
+<a class="results" href="searchresults.php">Back to search</a>
 
 <?php endif; ?>
 
@@ -99,9 +99,8 @@ include 'templates/header.php';
     <?php foreach ($userImages as $image) : ?>
         <div class="col-4">
             <div class="profile-images">
-            <a class="feed-image" href="image.php?img=<?php echo $image['id']; ?>"> 
                 <img src='images/<?php echo $image['filename'] ?>'>
-            </div></a>
+            </div>
         </div>
     <?php endforeach; ?>
 </div>
