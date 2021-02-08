@@ -25,7 +25,7 @@ function getPicturesFromUser($pdo)
 {
 
   // combine the users and images table by using the id from the users table and the user_id in images.
-  $statement = $pdo->prepare('SELECT users.id, users.username, users.fname, users.lname, users.profile_img, images.id, images.filename, images.text, images.created_at FROM users JOIN images WHERE users.id = images.user_id');
+  $statement = $pdo->prepare('SELECT users.id, users.username, users.fname, users.lname, users.profile_img, images.image_id, images.filename, images.text, images.created_at FROM users JOIN images WHERE users.id = images.user_id');
 
   $statement->execute();
 
@@ -81,7 +81,7 @@ $users = getPicturesFromUser($pdo);
               <h5 class="card-header">
                 <img class="profile-img" src="profile-images/<?php echo $user['profile_img']?>"><a  href="profiles.php?user=<?php echo $user['id']; ?>"><?= $user['username'] ?></a>
               </h5>
-              <a class="feed-picture" href="image.php?img=<?php echo $user['id']?>"> 
+              <a class="feed-picture" href="image.php?img=<?php echo $user['image_id']?>"> 
                 <img src='images/<?php echo $user['filename'] ?>'>
               </a>
               <p class="card-text"> <a class="feed-link" href="profiles.php?user=<?php echo $user['id']; ?>"> <?= $user['username'] ?></a> &nbsp;<?= $user['text'] ?> </p>

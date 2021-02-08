@@ -20,7 +20,7 @@ $userInfo = getPicturesFromUser($pdo, $image_id);
 function getPicture($pdo, $image_id)
 {
 
-    $statement = $pdo->prepare('SELECT * FROM images WHERE id = :id');
+    $statement = $pdo->prepare('SELECT * FROM images WHERE image_id = :id');
     $statement->execute([
         'id' => $image_id
     ]);
@@ -32,7 +32,7 @@ function getPicture($pdo, $image_id)
 function getPicturesFromUser($pdo, $image_id)
 {
     // combine the users and images table by using the id from the users table and the user_id in images.
-    $statement = $pdo->prepare('SELECT users.id, users.fname, users.lname, users.username, users.profile_img, images.text, images.created_at FROM images JOIN users ON images.id = :id AND images.user_id = users.id');
+    $statement = $pdo->prepare('SELECT users.id, users.fname, users.lname, users.username, users.profile_img, images.text, images.created_at FROM images JOIN users ON images.image_id = :id AND images.user_id = users.id');
 
     $statement->execute([
         'id' => $image_id
