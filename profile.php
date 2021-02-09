@@ -88,7 +88,7 @@ function updateUser($pdo, $id, $email, $p_img, $bio, $p_img_name, $fname, $lname
     $statement->bindValue(":fname", $fname, PDO::PARAM_STR);
     $statement->bindValue(":lname", $lname, PDO::PARAM_STR);
     $statement->bindValue(":email", $email, PDO::PARAM_STR);
-    $statement->bindValue(":p_img", "images/".$p_img_name, PDO::PARAM_STR);
+    $statement->bindValue(":p_img", $p_img_name, PDO::PARAM_STR);
     $statement->bindValue(":bio", $bio, PDO::PARAM_STR);
     $statement->bindValue(":id", $id, PDO::PARAM_STR);
     $statement->execute();
@@ -116,12 +116,14 @@ function updateProfileImage($p_img) {
       $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
       $extensions= array("jpeg","jpg","png");
       if(empty($errors)==true){
-         move_uploaded_file($file_tmp,"images/".$file_name);
+         move_uploaded_file($file_tmp,"images".$file_name);
       }else{
          print_r($errors);
       }
    }
 }
+
+
 
 include 'templates/header.php';
 ?>
@@ -149,7 +151,7 @@ button.close {
     <div class="col-4 pimg_holder d-inline-block">
       <div class="profile-images">
         <?php if(!empty($thisUser['0']['profile_img'])) {
-          echo "<img class='preview_profile_image' src='".$thisUser['0']['profile_img']."' style='border-radius:50%;'>";
+          echo "<img class='preview_profile_image' src='images/".$thisUser['0']['profile_img']."' style='border-radius:50%;'>";
         } else {
           echo "<img class='preview_profile_image' src='images/default.png' style='border-radius:50%;'>";
         }
