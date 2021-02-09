@@ -100,10 +100,15 @@ function get_timeago($ptime)
 ?>
 
 <div class="container-feed">
-
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" href="feed.php">All</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="followsfeed.php">Following</a>
+    </li>
+  </ul>
   <div class="row">
-
-  <nav class=""><a href="feed.php">All</a>&nbsp;&nbsp;<a href="followsfeed.php">Fellows</a></nav>
 
     <?php foreach (array_reverse($users) as $user) : ?>
       <div class="col-12">
