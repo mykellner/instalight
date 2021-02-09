@@ -6,13 +6,6 @@ require 'config.php';
 
 $userid = $_GET['user'];
 
-$thisUser = getUserById($pdo, $userid);
-$userImages = getUserImages($pdo, $userid);
-$userAmount = getAmountOfPictures($pdo, $userid);
-$myid = $_SESSION['userid'];
-checkIfFollow($pdo, $myid, $userid);
-$follows;
-
 function checkIfFollow ($pdo, $userid, $friendID) {
 
     $sql = 'SELECT id FROM follows WHERE user_ID = :user_id AND friendID = :friendID';
@@ -29,10 +22,18 @@ function checkIfFollow ($pdo, $userid, $friendID) {
         $follows = 'true';
         } else {
             $follows = 'false';
+            
         }
 
-
 }
+
+$thisUser = getUserById($pdo, $userid);
+$userImages = getUserImages($pdo, $userid);
+$userAmount = getAmountOfPictures($pdo, $userid);
+$myid = $_SESSION['userid'];
+checkIfFollow($pdo, $myid, $userid);
+$follows;
+$followers = getAmountOfFollowers($pdo, $userid);
 
 
 if(isset($_POST['submit-follow'])) {
@@ -41,6 +42,7 @@ if(isset($_POST['submit-follow'])) {
 }
 
 function addToFollow($pdo, $userid, $friendID) {
+
     $sql = 'INSERT INTO follows (user_id, friendID) VALUES (:user_id, :friendID)';
 
     $statement = $pdo->prepare($sql);
@@ -51,6 +53,11 @@ function addToFollow($pdo, $userid, $friendID) {
 
     global $follows;
     $follows = 'true';
+    $_SESSION['follows'] = 'true';
+
+    getAmountOfFollowers($pdo, $friendID);
+    header('Refresh: 0');
+    
 }
 
 if(isset($_POST['submit-unfollow'])) {
@@ -69,9 +76,15 @@ function unFollow($pdo, $userid, $friendID) {
 
     global $follows;
     $follows = 'false';
+
+    getAmountOfFollowers($pdo, $friendID);
+    header('Refresh: 0');
+    
 }
 
-function getUserImages($pdo, $userid) {
+
+function getUserImages($pdo, $userid)
+{
 
     $sql = 'SELECT * FROM users
     JOIN images
@@ -84,10 +97,14 @@ function getUserImages($pdo, $userid) {
     ]);
 
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
     return $results;
 }
 
-function getUserById($pdo, $id) {
+
+
+function getUserById($pdo, $id)
+{
 
     $statement = $pdo->prepare('SELECT * FROM users WHERE id = :id');
     $statement->execute([
@@ -99,7 +116,7 @@ function getUserById($pdo, $id) {
     // loop to see if file_name is empty, if it is, a deafult picture will be added.
     foreach ($users as $index => $user){
         if(empty($user['profile_img'])) {
-            $users[$index]['profile_img'] = '/default.png';
+            $users[$index]['profile_img'] = 'default.png';
         }
     }
     return $users;
@@ -119,15 +136,19 @@ function getAmountOfPictures($pdo, $userid)
     return ($statement->fetchColumn());
 }
 
-function getAmountOfFollowers($pdo, $userid) {
+
+  function getAmountOfFollowers($pdo, $userid)
+{
+
     $sql = 'SELECT COUNT(*) FROM follows as TOTAL WHERE friendID = :id';
+
     $statement = $pdo->prepare($sql);
     $statement->execute([
-        'id' => $userid]);
-        return ($statement->fetchColumn());
-}
+        'id' => $userid
+    ]);
 
-$followers = getAmountOfFollowers($pdo, $userid);
+    return ($statement->fetchColumn());
+}
 
 include 'templates/header.php';
 
@@ -145,27 +166,30 @@ include 'templates/header.php';
         <?php foreach ($thisUser as $user) : ?>
             <h3><?php echo $user['username'] ?> </h3> 
             <p><?php echo $user['fname'] . " " . $user['lname'] ?></p>
-            <p class="bio"><?php echo $user['bio'] ?></p>
+            <p> <b><?php echo $userAmount; ?></b> Posts </p>
+            <p> <b><?php echo $followers; ?></b> Followers </p>
+            
 
-            <p> <b><?php echo $userAmount; ?></b> Posts <b> &nbsp;<?php echo $followers; ?></b> Followers </p>
-            
-            <?php if($follows == 'false') : ?>
-            <form method="POST">
-                <button type="submit" name="submit-follow" class="btn btn-primary btn-sm">Follow</button>
-            </form>
-            <?php endif; ?>
-            
             <?php if($follows == 'true') : ?>
             
             <form method="POST">
-                <button type="submit" name="submit-unfollow" class="btn btn-primary btn-sm">Unfollow</button>
+            <button type="submit" name="submit-unfollow" class="btn btn-primary btn-sm">Unfollow</button>
             </form>
 
             <?php endif; ?>
 
-          
+            <?php if($follows == 'false') : ?>
+            
+            <form method="POST">
+            <button type="submit" name="submit-follow" class="btn btn-primary btn-sm">Follow</button>
+            </form>
+
+            <?php endif; ?>
         <?php endforeach; ?> 
+
+        
     </div>
+    
 
 <?php if(isset($_SESSION['search'])) : ?>
 
@@ -174,18 +198,23 @@ include 'templates/header.php';
 <?php endif; ?>
 
 
+
 </div>
 
-<div class="row profile-images-feed">
 
-    <?php foreach (array_reverse($userImages) as $image) : ?>
+<div class="row profile-images-feed">
+    <?php foreach ($userImages as $image) : ?>
         <div class="col-4">
             <div class="profile-images">
-            <a class="feed-image" href="image.php?img=<?php echo $image['image_id']; ?>"> 
+            <a class="feed-image" href="image.php?img=<?php echo $image['id']; ?>"> 
                 <img src='images/<?php echo $image['filename'] ?>'>
             </div></a>
         </div>
     <?php endforeach; ?>
 </div>
 
-<?php include 'templates/footer.php' ?>
+
+
+</body>
+
+</html>
