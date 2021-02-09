@@ -158,7 +158,7 @@ include 'templates/header.php';
 
     <div class="col-3">
         <?php foreach ($thisUser as $user) : ?>
-            <img class="profile-picture" src="profile-images/<?php echo $user['profile_img'] ?>">
+            <img class="profile-picture" src="<?php echo $user['profile_img'] ?>">
         <?php endforeach; ?>
     </div>
 
