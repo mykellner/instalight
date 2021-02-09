@@ -1,6 +1,5 @@
 <?php
 
-<<<<<<< Updated upstream
 $profile_id = $_GET['id'];
 
 if (!empty($profile_id)) {
@@ -10,7 +9,7 @@ if (!empty($profile_id)) {
 	/*ifall inget id bara redirecta till main filen*/
 	header('location: /');
 }
-=======
+
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 /*Edit:
