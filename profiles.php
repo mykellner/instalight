@@ -205,7 +205,7 @@ include 'templates/header.php';
     <?php foreach ($userImages as $image) : ?>
         <div class="col-4">
             <div class="profile-images">
-            <a class="feed-image" href="image.php?img=<?php echo $image['id']; ?>"> 
+            <a class="feed-image" href="image.php?img=<?php echo $image['image_id']; ?>"> 
                 <img src='images/<?php echo $image['filename'] ?>'>
             </div></a>
         </div>
