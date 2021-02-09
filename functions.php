@@ -94,4 +94,3 @@ function getPicturesFromFriends($pdo, $stringFriends)
   return $users;
 }
 
-  

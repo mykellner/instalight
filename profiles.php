@@ -12,27 +12,7 @@ $userAmount = getAmountOfPictures($pdo, $userid);
 $myid = $_SESSION['userid'];
 checkIfFollow($pdo, $myid, $userid);
 $follows;
-
-function checkIfFollow ($pdo, $userid, $friendID) {
-
-    $sql = 'SELECT id FROM follows WHERE user_ID = :user_id AND friendID = :friendID';
-
-    $statement = $pdo->prepare($sql);
-    $statement->execute([
-        'user_id' => $userid,
-        'friendID' => $friendID,
-    ]);
-
-
-    global $follows;
-    if($statement->rowCount() > 1){
-        $follows = 'true';
-        } else {
-            $follows = 'false';
-        }
-
-
-}
+$followers = getAmountOfFollowers($pdo, $userid);
 
 
 if(isset($_POST['submit-follow'])) {
@@ -51,6 +31,7 @@ function addToFollow($pdo, $userid, $friendID) {
 
     global $follows;
     $follows = 'true';
+    $_SESSION['follows'] = 'true';
 }
 
 if(isset($_POST['submit-unfollow'])) {
@@ -69,6 +50,30 @@ function unFollow($pdo, $userid, $friendID) {
 
     global $follows;
     $follows = 'false';
+    
+}
+
+
+function checkIfFollow ($pdo, $userid, $friendID) {
+
+    $sql = 'SELECT id FROM follows WHERE user_ID = :user_id AND friendID = :friendID';
+
+    $statement = $pdo->prepare($sql);
+    $statement->execute([
+        'user_id' => $userid,
+        'friendID' => $friendID,
+    ]);
+
+
+    global $follows;
+    if($statement->rowCount() > 1){
+        $follows = 'true';
+        } else {
+            $follows = 'false';
+            
+        }
+
+
 }
 
 function getUserImages($pdo, $userid)
@@ -124,6 +129,20 @@ function getAmountOfPictures($pdo, $userid)
     return ($statement->fetchColumn());
 }
 
+
+  function getAmountOfFollowers($pdo, $userid)
+{
+
+    $sql = 'SELECT COUNT(*) FROM follows as TOTAL WHERE friendID = :id';
+
+    $statement = $pdo->prepare($sql);
+    $statement->execute([
+        'id' => $userid
+    ]);
+
+    return ($statement->fetchColumn());
+}
+
 include 'templates/header.php';
 
 ?>
@@ -141,6 +160,8 @@ include 'templates/header.php';
             <h3><?php echo $user['username'] ?> </h3> 
             <p><?php echo $user['fname'] . " " . $user['lname'] ?></p>
             <p> <b><?php echo $userAmount; ?></b> Posts </p>
+            <p> <b><?php echo $followers; ?></b> Follwers </p>
+            
 
             <?php if($follows == 'true') : ?>
             
@@ -158,7 +179,10 @@ include 'templates/header.php';
 
             <?php endif; ?>
         <?php endforeach; ?> 
+
+        
     </div>
+    
 
 <?php if(isset($_SESSION['search'])) : ?>
 
