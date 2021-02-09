@@ -93,17 +93,22 @@ function get_timeago($ptime)
 ?>
 
 <div class="container-feed">
-
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" href="feed.php">All</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="followsfeed.php">Following</a>
+    </li>
+  </ul>
   <div class="row">
-
-  <nav class=""><a href="feed.php">All</a>&nbsp;&nbsp;<a href="followsfeed.php">Fellows</a></nav>
 
     <?php foreach (array_reverse($users) as $user) : ?>
       <div class="col-12">
           <div class="card">
             <div class="card-body">
               <h5 class="card-header">
-                <img class="profile-img" src="profile-images/<?php echo $user['profile_img']?>"><a  href="profiles.php?user=<?php echo $user['id']; ?>"><?= $user['username'] ?></a>
+                <img class="profile-img" src="images/<?php echo $user['profile_img']?>"><a  href="profiles.php?user=<?php echo $user['id']; ?>"><?= $user['username'] ?></a>
               </h5>
               </a>
               <div class="feed-picture">

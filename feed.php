@@ -14,7 +14,6 @@ if (!isset($_SESSION['logged_in'])) {
 if (isset($_SESSION['search'])) {
   unset($_SESSION['search']);
   unset($_SESSION['query']);
-
 }
 
 $image_id = $_GET['img'];
@@ -31,11 +30,11 @@ function getPicturesFromUser($pdo)
 
   $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-  foreach ($users as $index => $user){
-    if(empty($user['profile_img'])) {
-        $users[$index]['profile_img'] = '/default.png';
+  foreach ($users as $index => $user) {
+    if (empty($user['profile_img'])) {
+      $users[$index]['profile_img'] = '/default.png';
     }
-}
+  }
   return $users;
 }
 
@@ -72,18 +71,25 @@ $users = getPicturesFromUser($pdo);
 
 <div class="container-feed">
 
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="feed.php">All</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="followsfeed.php">Following</a>
+    </li>
+  </ul>
+
   <div class="row">
 
-  <nav class=""><a href="feed.php">All</a>&nbsp;&nbsp;<a href="followsfeed.php">Fellows</a></nav>
-
-    <?php foreach (array_reverse($users) as $user) : ?>
-      <div class="col-12">
+      <?php foreach (array_reverse($users) as $user) : ?>
+        <div class="col-12">
           <div class="card">
             <div class="card-body">
               <h5 class="card-header">
-                <img class="profile-img" src="images/<?php echo $user['profile_img']?>"><a  href="profiles.php?user=<?php echo $user['id']; ?>"><?= $user['username'] ?></a>
+                <img class="profile-img" src="images/<?php echo $user['profile_img'] ?>"><a href="profiles.php?user=<?php echo $user['id']; ?>"><?= $user['username'] ?></a>
               </h5>
-              <a class="feed-picture" href="image.php?img=<?php echo $user['image_id']?>"> 
+              <a class="feed-picture" href="image.php?img=<?php echo $user['image_id'] ?>">
                 <img src='images/<?php echo $user['filename'] ?>'>
               </a>
               <p class="card-text"> <a class="feed-link" href="profiles.php?user=<?php echo $user['id']; ?>"> <?= $user['username'] ?></a> &nbsp;<?= $user['text'] ?> </p>
@@ -92,12 +98,12 @@ $users = getPicturesFromUser($pdo);
               Posted: <?= $timeago = get_timeago(strtotime($user['created_at'])); ?>
             </div>
           </div>
-      
-      </div>
 
-    <?php endforeach; ?>
+        </div>
 
-  </div>
+      <?php endforeach; ?>
+
+    </div>
 
 
-  <?php include 'templates/footer.php' ?>
+    <?php include 'templates/footer.php' ?>
