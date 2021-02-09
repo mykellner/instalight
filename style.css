@@ -1,4 +1,7 @@
-/* Login Form */
+body { 
+  padding-top: 70px;
+  background-color: #fafafa;
+}/* Login Form */
 
 .signup-form h2 {
     font-size: 30px;
@@ -114,3 +117,203 @@
       width: 100%;
   
   }
+
+  .navbar-brand {
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+}
+
+/* Feed */
+
+.profile-img {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;   
+    margin: 0px 10px 0px 0px;
+    border: 1px solid rgba(0,0,0,0.125);
+
+}
+
+.feed-picture img {
+  width: 100%;
+  margin-bottom: 10px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(0,0,0,0.125);
+}
+
+.card-text {
+  margin: 0px 17px 10px 17px;
+  color: #343a40;
+}
+
+.card-text:last-child {
+  margin-bottom: 10px;
+}
+
+.card {
+  margin: 10px 0 10px 0;
+} 
+
+.card a {
+  text-decoration: none;
+  color: #343a40;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.card-header {
+  background-color: #fff;
+  font-size: 16px;
+  padding: 0.75rem 1rem;
+}
+
+.card-footer {
+  background-color: #fff;
+}
+
+.feed-link {
+  font-weight: 800;
+  text-decoration: none;
+  color: black;
+}
+
+.feed-link:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.container-feed {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+
+.body-loggin {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+.h1-header {
+  margin-left: 7px;
+}
+
+/* Profiles */
+
+.profile-picture {
+  object-fit: cover;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;   
+    margin: 0px 10px 0px 0px;
+    border: 1px solid rgba(0,0,0,0.125);
+}
+
+.profile-images {
+  max-width: 450px;
+  padding-bottom: 30px;
+  
+}
+
+.profile-images img:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.profile-images img {
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.profile-images-feed{
+  padding-top: 20px;
+  border-top: 1px solid rgba(0,0,0,0.125);
+}
+
+.profile-header {
+  margin: 20px 0 20px 0;
+}
+
+.profile-header h3{
+  margin-top: 30px;
+}
+
+.profile-header p {
+  margin-bottom: 5px;
+}
+
+.bio {
+  font-size: 13px;
+  margin-bottom: 10px !important;
+  font-style: italic;
+}
+
+.search-images {
+  width: 200px;
+  height: 300px;
+  margin: 10px;
+ 
+}
+
+.profileimages {
+
+  width: 200px;
+  height: 250px;
+  object-fit: cover;
+ 
+  
+}
+
+.searchusername {
+  font-size: 18px;
+}
+
+.searchname {
+  font-size: 12px;
+  margin-bottom: 3px;
+  margin-left: 5px;
+  align-self: flex-end;
+}
+
+.noresult {
+  padding: 20px;
+
+}
+
+.results {
+  margin-top: 15px;
+  font-style: oblique;
+  font-size: 17px;
+}
+
+/* Image Page */
+
+.comment-box {
+  margin: 0px;
+  height: 100%;
+}
+
+.images {
+  margin-top: 40px;
+}
+
+.picture img {
+  object-fit: cover;
+  width: 500px;
+}
+.picture {
+  max-width: 500px;
+}
+
+.comment-box .card-text {
+  margin-top: 10px;
+}
