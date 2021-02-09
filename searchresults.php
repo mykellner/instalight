@@ -66,7 +66,7 @@ $_SESSION['search'] = true;
             <a class="searchusername" href="profiles.php?user=<?php echo $result['id']; ?>"><?php echo $result['username'] ?></a>
             <p class="searchname"> ( <?php echo $result['fname'] . " " . $result['lname'] ?> )</p>
             </div>
-            <img class="profileimages" src="images/<?php echo $result['profile_img'] ?>">
+           <a href="profiles.php?user=<?php echo $result['id']; ?>"><img class="profileimages" src="images/<?php echo $result['profile_img'] ?>"></a> 
 
         </div>
 

@@ -78,9 +78,26 @@ function getUserImages($pdo, $id) {
 function newPost($pdo, $id, $p_img_name, $post_content) {
     $sql = "INSERT INTO images (user_id, filename, text) VALUES ('$id', '$p_img_name', '$post_content')";
     $pdo->exec($sql);
-    updateProfileImage($p_img_name);
+    newPostUpload($p_img_name);
     header('location: profile.php');
 }
+function newPostUpload ($p_img) {
+   if(isset($_FILES['image'])){
+      $errors= array();
+      $file_name = $_FILES['image']['name'];
+      $file_size =$_FILES['image']['size'];
+      $file_tmp =$_FILES['image']['tmp_name'];
+      $file_type=$_FILES['image']['type'];
+      $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
+      $extensions= array("jpeg","jpg","png");
+      if(empty($errors)==true){
+         move_uploaded_file($file_tmp,"images/".$file_name);
+      }else{
+         print_r($errors);
+      }
+   }
+}
+
 
 function updateUser($pdo, $id, $email, $p_img, $bio, $p_img_name, $fname, $lname) {
     $sql = "UPDATE users SET email=:email, bio=:bio, profile_img=:p_img, fname=:fname, lname=:lname WHERE id=:id";
@@ -116,13 +133,12 @@ function updateProfileImage($p_img) {
       $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
       $extensions= array("jpeg","jpg","png");
       if(empty($errors)==true){
-         move_uploaded_file($file_tmp,"images".$file_name);
+         move_uploaded_file($file_tmp,"profile-images/".$file_name);
       }else{
          print_r($errors);
       }
    }
 }
-
 
 
 include 'templates/header.php';
@@ -151,9 +167,9 @@ button.close {
     <div class="col-4 pimg_holder d-inline-block">
       <div class="profile-images">
         <?php if(!empty($thisUser['0']['profile_img'])) {
-          echo "<img class='preview_profile_image' src='images/".$thisUser['0']['profile_img']."' style='border-radius:50%;'>";
+          echo "<img class='preview_profile_image' src='profile-images/".$thisUser['0']['profile_img']."' style='border-radius:50%;'>";
         } else {
-          echo "<img class='preview_profile_image' src='images/default.png' style='border-radius:50%;'>";
+          echo "<img class='preview_profile_image' src='profile-images/default.png' style='border-radius:50%;'>";
         }
         ?>
       </div>
@@ -332,10 +348,7 @@ function showFileName( event ) {
 }
 </script>
 
-
-<!-- ni bör lägga denna i footer.php -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<?php include 'templates/footer.php';?>
 
 </body>
 

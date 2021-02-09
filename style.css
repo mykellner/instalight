@@ -258,13 +258,19 @@ body {
 }
 
 .search-images {
-  max-width: 200px;
+  width: 200px;
+  height: 300px;
   margin: 10px;
+ 
 }
 
-.search-images img {
-  object-fit: cover;
+.profileimages {
+
   width: 200px;
+  height: 250px;
+  object-fit: cover;
+ 
+  
 }
 
 .searchusername {
