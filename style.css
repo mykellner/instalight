@@ -1,7 +1,11 @@
+/* Body */
+
 body { 
   padding-top: 70px;
   background-color: #fafafa;
-}/* Login Form */
+}
+
+/* Login Form */
 
 .signup-form h2 {
     font-size: 30px;
@@ -25,7 +29,7 @@ body {
       margin: 0 auto;
       display: table;
       padding: 15px 30px 30px;
-      margin-top: 150px;
+      margin-top: 100px;
       box-sizing: border-box;
   }
   .form-group {
@@ -65,7 +69,7 @@ body {
     float: left;
     width: 100%;
     text-decoration: none;
-    color: #45aba6;
+    color: #363a3a;
     font-size: 14px;
     text-align: center;
     margin-top: 11px;
@@ -118,7 +122,8 @@ body {
   
   }
 
-  .navbar-brand {
+  /* navbar */
+.navbar-brand {
     transform: translateX(-50%);
     left: 50%;
     position: absolute;
@@ -271,6 +276,13 @@ body {
   object-fit: cover;
  
   
+  max-width: 200px;
+  margin: 10px;
+}
+
+.search-images img {
+  object-fit: cover;
+  width: 200px;
 }
 
 .searchusername {
