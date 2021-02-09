@@ -11,6 +11,7 @@ $id = $_SESSION['userid'];
 
 $thisUser      = getUserData($pdo, $id);
 $userImages    = getUserImages($pdo, $id);
+$userAmount    = getAmountOfPictures($pdo, $id);
 
 $p_img          = $_FILES["image"];
 $p_img_name     = $_FILES['image']['name'];
@@ -22,7 +23,7 @@ $password       = $_POST['password'];
 $post_content   = $_POST['post_content'];
 
 if(isset($_POST['submit'])) {
-    updateUser($pdo, $id, $email, $p_img, $bio, $p_img_name);
+    updateUser($pdo, $id, $email, $p_img, $bio, $p_img_name, $fname, $lname);
 }
 
 if(isset($_POST['post_content'])) {
@@ -45,7 +46,18 @@ function isUpdatedPassword() {
 function isNewPost() {
   echo '<div class="container"><div class="alert alert-success timer" role="alert">Your post has been published.</div></div>';
 }
+function getAmountOfPictures($pdo, $id)
+{
 
+    $sql = 'SELECT COUNT(*) FROM images as TOTAL WHERE user_id = "'.$id.'"';
+
+    $statement = $pdo->prepare($sql);
+    $statement->execute([
+        'id' => $id
+    ]);
+
+    return ($statement->fetchColumn());
+}
 function getUserData($pdo, $id) {
     $statement = $pdo->prepare('SELECT * FROM users WHERE id ='.$id.'');
     $statement->execute();
@@ -71,7 +83,7 @@ function newPost($pdo, $id, $p_img_name, $post_content) {
 }
 
 function updateUser($pdo, $id, $email, $p_img, $bio, $p_img_name, $fname, $lname) {
-    $sql = "UPDATE users SET email=:email, bio=:bio, fname=:fname, lname=:lname, profile_img=:p_img WHERE id=:id";
+    $sql = "UPDATE users SET email=:email, bio=:bio, profile_img=:p_img, fname=:fname, lname=:lname WHERE id=:id";
     $statement = $pdo->prepare($sql);
     $statement->bindValue(":fname", $fname, PDO::PARAM_STR);
     $statement->bindValue(":lname", $lname, PDO::PARAM_STR);
@@ -131,7 +143,6 @@ button.close {
     font-size: 28px;
 }
 
-.modal
 </style>
 
 <div class="row profile-header">
@@ -156,7 +167,7 @@ button.close {
       </p>
 
         <?php if (!empty($userImages)) {
-          echo "<button type='button' class='btn btn-primary mt-2' data-toggle='modal' data-target='#exampleModal'><i class='fas fa-camera-retro'> </i> Create new post</button>";
+          echo "<button type='button' class='btn btn-primary mt-2' data-toggle='modal' data-target='#post_modal'><i class='fas fa-camera-retro'> </i> Create new post</button>";
         }?>
     </div>
 </div>
@@ -175,7 +186,6 @@ button.close {
     <div id="settings" class="collapse" aria-labelledby="acc_settings" data-parent="#accordion">
       <div class="card-body">
         <div class="col-12 p-4">
-          <!-- form -->
           <form enctype="multipart/form-data" action="profile.php" method="post">
             <div class="upload_img mb-3">
                 <div class="current_p_img">
@@ -224,14 +234,11 @@ button.close {
     <div id="password" class="collapse" aria-labelledby="acc_password" data-parent="#accordion">
       <div class="card-body">
         <div class="col-12 p-4">
-          <!-- form -->
           <form action="profile.php" method="post">
-
             <div class="form-group">
               <label for="password">Password</label>
               <input type="text" name="password" class="form-control" id="password" value="" placeholder="Enter the new password">
             </div> 
-
             <button class="btn btn-success mt-3" name="change_pw" type="submit">Save new password</button>
           </form>
          </div>
@@ -240,14 +247,15 @@ button.close {
   </div>
 </div>
 
-<!-- post loop -->
 <div class="row">
   <div class="col-12">
-    <h4 class="mt-4">Posts</h4>
+    <?php if ($userAmount > 0) {
+      echo '<h4 class="mt-4">Posts ('.$userAmount.')</h4>';
+    }?>
       <hr>
       <div class="row">
         <?php if (empty($userImages)) {
-          echo "<div class='col-12 mt-5 mb-5 text-center'><h5>You have not posted any images yet.</h5><button type='button' class='btn btn-primary mt-2' data-toggle='modal' data-target='#exampleModal'>Create your first post!</button></div>";
+          echo "<div class='col-12 mt-5 mb-5 text-center'><h5>You have not posted any images yet.</h5><button type='button' class='btn btn-primary mt-2' data-toggle='modal' data-target='#post_modal'>Create your first post!</button></div>";
         } else
           foreach ($userImages as $image) {
             echo "<div class='col-4'>
@@ -262,23 +270,19 @@ button.close {
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- modal -->
+<div class="modal fade" id="post_modal" tabindex="-1" role="dialog" aria-labelledby="post_modal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New post</h5>
+        <h5 class="modal-title" id="post_modal">New post</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
      <form enctype="multipart/form-data" action="profile.php" method="post">
       <div class="modal-body">
-
-          <!-- Uploaded image area-->
           <div id="prev_post_img" class="image-area mt-4 mb-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded mx-auto d-block"></div>
-
-          <!-- Upload image input-->
           <div class="input-group mb-3 px-2 py-2 bg-white">
               <input id="upload" name="image" type="file" onchange="readURL(this);" class="form-control border-0">
               <div class="input-group-append">
@@ -304,7 +308,6 @@ button.close {
 setTimeout(function() {
     $('.timer').fadeOut('slow');
 }, 5000);
-
 function readURL(input) {
     if (input.files && input.files[0]) {
         let reader = new FileReader();
@@ -335,4 +338,3 @@ function showFileName( event ) {
 </body>
 
 </html>
->>>>>>> Stashed changes
