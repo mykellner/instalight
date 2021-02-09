@@ -116,7 +116,7 @@ function getUserById($pdo, $id)
     // loop to see if file_name is empty, if it is, a deafult picture will be added.
     foreach ($users as $index => $user){
         if(empty($user['profile_img'])) {
-            $users[$index]['profile_img'] = 'default.png';
+            $users[$index]['profile_img'] = '/default.png';
         }
     }
     return $users;
@@ -166,6 +166,8 @@ include 'templates/header.php';
         <?php foreach ($thisUser as $user) : ?>
             <h3><?php echo $user['username'] ?> </h3> 
             <p><?php echo $user['fname'] . " " . $user['lname'] ?></p>
+            <p class="bio"><?php echo $user['bio'] ?></p>
+
             <p> <b><?php echo $userAmount; ?></b> Posts </p>
             <p> <b><?php echo $followers; ?></b> Follwers </p>
             
@@ -203,10 +205,11 @@ include 'templates/header.php';
 
 
 <div class="row profile-images-feed">
-    <?php foreach ($userImages as $image) : ?>
+
+    <?php foreach (array_reverse($userImages) as $image) : ?>
         <div class="col-4">
             <div class="profile-images">
-            <a class="feed-image" href="image.php?img=<?php echo $image['id']; ?>"> 
+            <a class="feed-image" href="image.php?img=<?php echo $image['image_id']; ?>"> 
                 <img src='images/<?php echo $image['filename'] ?>'>
             </div></a>
         </div>
