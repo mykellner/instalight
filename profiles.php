@@ -25,7 +25,7 @@ function checkIfFollow ($pdo, $userid, $friendID) {
 
 
     global $follows;
-    if($statement->rowCount() > 1){
+    if($statement->rowCount() == 1){
         $follows = 'true';
         } else {
             $follows = 'false';
@@ -119,6 +119,16 @@ function getAmountOfPictures($pdo, $userid)
     return ($statement->fetchColumn());
 }
 
+function getAmountOfFollowers($pdo, $userid) {
+    $sql = 'SELECT COUNT(*) FROM follows as TOTAL WHERE friendID = :id';
+    $statement = $pdo->prepare($sql);
+    $statement->execute([
+        'id' => $userid]);
+        return ($statement->fetchColumn());
+}
+
+$followers = getAmountOfFollowers($pdo, $userid);
+
 include 'templates/header.php';
 
 ?>
@@ -137,7 +147,7 @@ include 'templates/header.php';
             <p><?php echo $user['fname'] . " " . $user['lname'] ?></p>
             <p class="bio"><?php echo $user['bio'] ?></p>
 
-            <p> <b><?php echo $userAmount; ?></b> Posts </p>
+            <p> <b><?php echo $userAmount; ?></b> Posts <b> &nbsp;<?php echo $followers; ?></b> Followers </p>
             
             <?php if($follows == 'false') : ?>
             <form method="POST">
