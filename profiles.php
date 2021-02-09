@@ -6,6 +6,27 @@ require 'config.php';
 
 $userid = $_GET['user'];
 
+function checkIfFollow ($pdo, $userid, $friendID) {
+
+    $sql = 'SELECT id FROM follows WHERE user_ID = :user_id AND friendID = :friendID';
+
+    $statement = $pdo->prepare($sql);
+    $statement->execute([
+        'user_id' => $userid,
+        'friendID' => $friendID,
+    ]);
+
+
+    global $follows;
+    if($statement->rowCount() == 1){
+        $follows = 'true';
+        } else {
+            $follows = 'false';
+            
+        }
+
+}
+
 $thisUser = getUserById($pdo, $userid);
 $userImages = getUserImages($pdo, $userid);
 $userAmount = getAmountOfPictures($pdo, $userid);
@@ -21,6 +42,7 @@ if(isset($_POST['submit-follow'])) {
 }
 
 function addToFollow($pdo, $userid, $friendID) {
+
     $sql = 'INSERT INTO follows (user_id, friendID) VALUES (:user_id, :friendID)';
 
     $statement = $pdo->prepare($sql);
@@ -32,6 +54,10 @@ function addToFollow($pdo, $userid, $friendID) {
     global $follows;
     $follows = 'true';
     $_SESSION['follows'] = 'true';
+
+    getAmountOfFollowers($pdo, $friendID);
+    header('Refresh: 0');
+    
 }
 
 if(isset($_POST['submit-unfollow'])) {
@@ -50,31 +76,12 @@ function unFollow($pdo, $userid, $friendID) {
 
     global $follows;
     $follows = 'false';
+
+    getAmountOfFollowers($pdo, $friendID);
+    header('Refresh: 0');
     
 }
 
-
-function checkIfFollow ($pdo, $userid, $friendID) {
-
-    $sql = 'SELECT id FROM follows WHERE user_ID = :user_id AND friendID = :friendID';
-
-    $statement = $pdo->prepare($sql);
-    $statement->execute([
-        'user_id' => $userid,
-        'friendID' => $friendID,
-    ]);
-
-
-    global $follows;
-    if($statement->rowCount() > 1){
-        $follows = 'true';
-        } else {
-            $follows = 'false';
-            
-        }
-
-
-}
 
 function getUserImages($pdo, $userid)
 {
