@@ -91,7 +91,7 @@ function get_timeago($ptime)
             <div class="card comment-box">
                 <div class="card-body comment-box">
                     <h5 class="card-header">
-                        <img class="profile-img" src="profile-images/<?php echo $info['profile_img'] ?>">
+                        <img class="profile-img" src="images/<?php echo $info['profile_img'] ?>">
                         <a href="profiles.php?user=<?php echo $info['id']; ?>"><?= $info['username'] ?></a>
                     </h5>
                     
