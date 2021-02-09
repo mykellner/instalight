@@ -166,8 +166,7 @@ include 'templates/header.php';
         <?php foreach ($thisUser as $user) : ?>
             <h3><?php echo $user['username'] ?> </h3> 
             <p><?php echo $user['fname'] . " " . $user['lname'] ?></p>
-            <p> <b><?php echo $userAmount; ?></b> Posts </p>
-            <p> <b><?php echo $followers; ?></b> Followers </p>
+            <p> <b><?php echo $userAmount; ?></b> Posts &nbsp; <b><?php echo $followers; ?></b> Followers </p>
             
 
             <?php if($follows == 'true') : ?>
