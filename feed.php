@@ -87,7 +87,7 @@ $users = getPicturesFromUser($pdo);
           <div class="card">
             <div class="card-body">
               <h5 class="card-header">
-                <img class="profile-img" src="images/<?php echo $user['profile_img'] ?>"><a href="profiles.php?user=<?php echo $user['id']; ?>"><?= $user['username'] ?></a>
+                <img class="profile-img" src="profile-images/<?php echo $user['profile_img'] ?>"><a href="profiles.php?user=<?php echo $user['id']; ?>"><?= $user['username'] ?></a>
               </h5>
               <a class="feed-picture" href="image.php?img=<?php echo $user['image_id'] ?>">
                 <img src='images/<?php echo $user['filename'] ?>'>
