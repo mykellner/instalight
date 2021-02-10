@@ -329,3 +329,9 @@ body {
 .comment-box .card-text {
   margin-top: 10px;
 }
+
+.notfollowing {
+  margin-top: 30px;
+  text-align: center;
+  width: 100%;
+}

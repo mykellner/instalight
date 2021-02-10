@@ -21,7 +21,6 @@ if(isset($_SESSION['search'])) {
 $myid = $_SESSION['userid'];
 
 $myFriends = checkFriends($pdo, $myid);
-$stringFriends = array_values($myFriends);
 
 function checkFriends ($pdo, $userid) {
 
@@ -35,6 +34,7 @@ function checkFriends ($pdo, $userid) {
 
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+  
     $friends = [];
 
     foreach($results as $result) {
@@ -46,7 +46,12 @@ function checkFriends ($pdo, $userid) {
 
 }
 
+if(!empty($myFriends)) {
+
+$stringFriends = array_values($myFriends);
 $users = getPicturesFromFriends($pdo, $stringFriends);
+
+} 
 
 
 function getPicturesFromFriends($pdo, $stringFriends)
@@ -68,6 +73,8 @@ function getPicturesFromFriends($pdo, $stringFriends)
 
   return $users;
 }
+
+
 
 
 
@@ -110,7 +117,12 @@ function get_timeago($ptime)
   </ul>
   <div class="row">
 
-    <?php foreach (array_reverse($users) as $user) : ?>
+
+
+    <?php if(empty($users)) : ?>
+      <h3 class="notfollowing">Du har inte valt att följa några användare.. </h3>
+    <?php endif; ?>
+  <?php foreach (array_reverse($users) as $user) : ?>
       <div class="col-12">
           <div class="card">
             <div class="card-body">
@@ -127,11 +139,15 @@ function get_timeago($ptime)
               Posted: <?= $timeago = get_timeago(strtotime($user['created_at'])); ?>
             </div>
           </div>
-      
-      </div>
+          </div>
+     
 
     <?php endforeach; ?>
+    
+    
+    
 
+    
   </div>
 
 
