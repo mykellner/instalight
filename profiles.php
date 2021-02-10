@@ -169,7 +169,7 @@ include 'templates/header.php';
             <p class="bio"><?php echo $user['bio'] ?></p>
 
             <p> <b><?php echo $userAmount; ?></b> Posts </p>
-            <p> <b><?php echo $followers; ?></b> Follwers </p>
+            <p> <b><?php echo $followers; ?></b> Followers </p>
             
 
             <?php if($follows == 'true') : ?>

@@ -119,9 +119,7 @@ if(empty($usernameErr) && empty($emailErr) && empty($passErr) && empty($cpassErr
  $_SESSION['username'] = $username;
  $_SESSION['role'] = $res['role'];
  $_SESSION['logged_in'] = true;
-
- session_start();  // starta sessionen i samband med registreringen - 2021-02-08 tomas.
- header("location: index.php");
+ header("location: feed.php");
  } else{
  echo "Something went wrong. Please try again later.";
  }

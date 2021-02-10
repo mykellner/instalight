@@ -223,6 +223,11 @@ body {
   
 }
 
+.profileimages {
+  width: 200px;
+  height: 200px;
+}
+
 .profile-images img:hover {
   opacity: 0.8;
   cursor: pointer;
