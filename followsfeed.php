@@ -121,8 +121,8 @@ function get_timeago($ptime)
 
     <?php if(empty($users)) : ?>
       <h3 class="notfollowing">Du har inte valt att följa några användare.. </h3>
-    <?php endif; ?>
-  <?php foreach (array_reverse($users) as $user) : ?>
+    <? else: ?>
+      <?php foreach (array_reverse($users) as $user) : ?>
       <div class="col-12">
           <div class="card">
             <div class="card-body">
@@ -140,9 +140,11 @@ function get_timeago($ptime)
             </div>
           </div>
           </div>
-     
-
+  
     <?php endforeach; ?>
+    <?php endif; ?>
+    
+  
     
     
     
