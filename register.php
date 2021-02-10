@@ -120,6 +120,7 @@ if(empty($usernameErr) && empty($emailErr) && empty($passErr) && empty($cpassErr
  $_SESSION['role'] = $res['role'];
  $_SESSION['logged_in'] = true;
  header("location: index.php");
+ 
  } else{
  echo "Something went wrong. Please try again later.";
  }
