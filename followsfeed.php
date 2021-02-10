@@ -54,9 +54,7 @@ function getPicturesFromFriends($pdo, $stringFriends)
     
   $statement = $pdo->prepare("SELECT users.id, users.username, users.fname, users.lname, users.profile_img, images.filename, images.text, images.created_at FROM users JOIN images ON users.id = images.user_id WHERE users.id IN ($in)");
 
-    $statement->execute(
-    $stringFriends
-  );
+    $statement->execute($stringFriends);
 
   $users = $statement->fetchAll(PDO::FETCH_ASSOC); 
 
