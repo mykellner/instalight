@@ -1,9 +1,9 @@
 <?php session_start(); 
 
-/*if (!isset($_SESSION['logged_in'])) {
+if (!isset($_SESSION['logged_in'])) {
     header('Location: index.php');
     exit;
-}*/
+}
 
 
 ?>
@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="style.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-
 
 </head>
 
