@@ -95,7 +95,12 @@ $users = getPicturesFromUser($pdo);
               <p class="card-text"> <a class="feed-link" href="profiles.php?user=<?php echo $user['id']; ?>"> <?= $user['username'] ?></a> &nbsp;<?= $user['text'] ?> </p>
             </div>
             <div class="card-footer text-muted">
-              Posted: <?= $timeago = get_timeago(strtotime($user['created_at'])); ?>
+              <input type="checkbox" class="like-btn">
+               <i class="fa fa-heart"></i>
+               </input>
+          <div class="post-card-footer">
+               Posted: <?= $timeago = get_timeago(strtotime($user['created_at'])); ?>
+      </div>
             </div>
           </div>
 
