@@ -117,8 +117,6 @@ function get_timeago($ptime)
   </ul>
   <div class="row">
 
-
-
     <?php if(empty($users)) : ?>
       <h3 class="notfollowing">Du har inte valt att följa några användare.. </h3>
     <? else: ?>
