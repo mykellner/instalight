@@ -117,33 +117,30 @@ function get_timeago($ptime)
   </ul>
   <div class="row">
 
-
-
-    <?php if(empty($users)) : ?>
-      <h3 class="notfollowing">Du har inte valt att följa några användare.. </h3>
-    <? else: ?>
-      <?php foreach (array_reverse($users) as $user) : ?>
-      <div class="col-12">
+<?php
+   if(empty($users)) {
+       echo '<h3 class="notfollowing">Du har inte valt att följa några användare.. </h3>';
+   } else {
+       foreach (array_reverse($users) as $user) {
+           echo '<div class="col-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-header">
-                <img class="profile-img" src="profile-images/<?php echo $user['profile_img']?>"><a  href="profiles.php?user=<?php echo $user['id']; ?>"><?= $user['username'] ?></a>
-              </h5>
-              </a>
-              <div class="feed-picture">
-                <img src='images/<?php echo $user['filename'] ?>'>
-              </div>
-              <p class="card-text"> <a class="feed-link" href="profiles.php?user=<?php echo $user['id']; ?>"> <?= $user['username'] ?></a> &nbsp;<?= $user['text'] ?> </p>
-            </div>
-            <div class="card-footer text-muted">
-              Posted: <?= $timeago = get_timeago(strtotime($user['created_at'])); ?>
+              <h5 class="card-header">';
+            echo '<img class="profile-img" src="profile-images/'.$user["profile_img"].'"><a href="profiles.php?user='.$user['id'].'">'.$user["username"].'</a>';
+            echo "</h5></a>";
+            echo '<div class="feed-picture">
+                    <img src="images/'.$user["filename"].'">
+                  </div>';
+            echo '<p class="card-text"> <a class="feed-link" href="profiles.php?user='.$user["id"].'"> '.$user["username"].'</a> &nbsp;'.$user["text"].'</p>
+            </div>';
+            echo '            <div class="card-footer text-muted">
+              Posted: '.$timeago = get_timeago(strtotime($user['created_at'])).'
             </div>
           </div>
-          </div>
-  
-    <?php endforeach; ?>
-    <?php endif; ?>
-    
+          </div>';
+       }
+   }
+?>
   
     
     
