@@ -21,7 +21,6 @@ if(isset($_SESSION['search'])) {
 $myid = $_SESSION['userid'];
 
 $myFriends = checkFriends($pdo, $myid);
-$stringFriends = array_values($myFriends);
 
 function checkFriends ($pdo, $userid) {
 
@@ -35,6 +34,7 @@ function checkFriends ($pdo, $userid) {
 
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+  
     $friends = [];
 
     foreach($results as $result) {
@@ -46,7 +46,12 @@ function checkFriends ($pdo, $userid) {
 
 }
 
+if(!empty($myFriends)) {
+
+$stringFriends = array_values($myFriends);
 $users = getPicturesFromFriends($pdo, $stringFriends);
+
+} 
 
 
 function getPicturesFromFriends($pdo, $stringFriends)
@@ -59,8 +64,17 @@ function getPicturesFromFriends($pdo, $stringFriends)
   );
 
   $users = $statement->fetchAll(PDO::FETCH_ASSOC); 
+
+  foreach ($users as $index => $user){
+    if(empty($user['profile_img'])) {
+        $users[$index]['profile_img'] = '/default.png';
+    }
+}
+
   return $users;
 }
+
+
 
 
 
@@ -93,33 +107,46 @@ function get_timeago($ptime)
 ?>
 
 <div class="container-feed">
-
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" href="feed.php">All</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="followsfeed.php">Following</a>
+    </li>
+  </ul>
   <div class="row">
 
-  <nav class=""><a href="feed.php">All</a>&nbsp;&nbsp;<a href="followsfeed.php">Fellows</a></nav>
-
-    <?php foreach (array_reverse($users) as $user) : ?>
-      <div class="col-12">
+<?php
+   if(empty($users)) {
+       echo '<h3 class="notfollowing">Du har inte valt att följa några användare.. </h3>';
+   } else {
+       foreach (array_reverse($users) as $user) {
+           echo '<div class="col-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-header">
-                <img class="profile-img" src="profile-images/<?php echo $user['profile_img']?>"><a  href="profiles.php?user=<?php echo $user['id']; ?>"><?= $user['username'] ?></a>
-              </h5>
-              </a>
-              <div class="feed-picture">
-                <img src='images/<?php echo $user['filename'] ?>'>
-              </div>
-              <p class="card-text"> <a class="feed-link" href="profiles.php?user=<?php echo $user['id']; ?>"> <?= $user['username'] ?></a> &nbsp;<?= $user['text'] ?> </p>
-            </div>
-            <div class="card-footer text-muted">
-              Posted: <?= $timeago = get_timeago(strtotime($user['created_at'])); ?>
+              <h5 class="card-header">';
+            echo '<img class="profile-img" src="profile-images/'.$user["profile_img"].'"><a href="profiles.php?user='.$user['id'].'">'.$user["username"].'</a>';
+            echo "</h5></a>";
+            echo '<div class="feed-picture">
+                    <img src="images/'.$user["filename"].'">
+                  </div>';
+            echo '<p class="card-text"> <a class="feed-link" href="profiles.php?user='.$user["id"].'"> '.$user["username"].'</a> &nbsp;'.$user["text"].'</p>
+            </div>';
+            echo '            <div class="card-footer text-muted">
+              Posted: '.$timeago = get_timeago(strtotime($user['created_at'])).'
             </div>
           </div>
-      
-      </div>
+          </div>';
+       }
+   }
+?>
+  
+    
+    
+    
 
-    <?php endforeach; ?>
-
+    
   </div>
 
 
